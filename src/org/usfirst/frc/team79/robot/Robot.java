@@ -1,33 +1,44 @@
 package org.usfirst.frc.team79.robot;
 
+import org.usfirst.frc.team79.robot.commands.CommandBase;
+import org.usfirst.frc.team79.robot.commands.Teleop;
 
-import edu.wpi.first.wpilibj.SampleRobot;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
-public class Robot extends SampleRobot {
-	
-    RobotDrive myRobot;  
-    Joystick leftStick;  
-    Joystick rightStick; 
+public class Robot extends IterativeRobot {
+
+    public void robotInit() {
+    	OI.init();
+    	CommandBase.init();
+    }
+
+    public void teleopInit() {
+    	new Teleop().start();
+    }
+
+    public void teleopPeriodic() {
+        Scheduler.getInstance().run();
+    }
     
-    public Robot() {
+    public void autonomousInit() {
     	
-        myRobot = new RobotDrive(0, 1);
-        leftStick = new Joystick(0);
-        rightStick = new Joystick(1);
-        
     }
 
-    public void operatorControl() {
+    public void autonomousPeriodic() {
     	
-        myRobot.setSafetyEnabled(true);
-        
-        while (isOperatorControl() && isEnabled()) {
-        	myRobot.tankDrive(leftStick, rightStick);
-            Timer.delay(0.005);		
-        }
     }
+    
+    public void disabledInit(){
 
+    }
+    
+    public void testPeriodic() {
+    	
+    }
+	
+	public void disabledPeriodic() {
+		
+	}
+	
 }
