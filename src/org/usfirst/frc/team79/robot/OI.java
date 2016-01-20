@@ -10,10 +10,12 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
 	
 	public static Joystick left, right;
+	public static JoystickButton toggle;
 	
 	public static void init() {
 		left = new Joystick(RobotMap.LEFTCONTROLLER);
 		right = new Joystick(RobotMap.RIGHTCONTROLLER);
+		toggle = new JoystickButton(left, 0);
 	}
 	
 	public static double getLeft() {
@@ -22,6 +24,14 @@ public class OI {
 	
 	public static double getRight() {
 		return right.getY();
+	}
+	
+	public static double getX() {
+		return left.getX();
+	}
+	
+	public static double getY() {
+		return left.getX();
 	}
 
 }
