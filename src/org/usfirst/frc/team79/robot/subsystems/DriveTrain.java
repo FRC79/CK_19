@@ -13,8 +13,12 @@ public class DriveTrain extends Subsystem {
 		drive = new RobotDrive(RobotMap.MOTORLEFT, RobotMap.MOTORRIGHT);
 	}
 	
-	public void move(double left, double right) {
+	public void moveTank(double left, double right) {
 		drive.tankDrive(left, right);
+	}
+	
+	public void moveArcade(double moveValue, double rotateValue) {
+		drive.arcadeDrive(moveValue, rotateValue);
 	}
 
 	@Override
