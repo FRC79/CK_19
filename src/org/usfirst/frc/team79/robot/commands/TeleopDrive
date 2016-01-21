@@ -1,0 +1,55 @@
+package org.usfirst.frc.team79.robot.commands;
+
+import org.usfirst.frc.team79.robot.CommandBase;
+import org.usfirst.frc.team79.robot.OI;
+
+import edu.wpi.first.wpilibj.Timer;
+
+public class TeleopDrive extends CommandBase {
+	
+	boolean toggle;
+ public TeleopDrive() {
+  requires(drive);
+ }
+
+ @Override
+ protected void initialize() {
+  // TODO Auto-generated method stub
+  
+ }
+
+ @Override
+	protected void execute() {
+	 
+	 	if(OI.arcButton.get()) {
+	 		toggle = !toggle;
+	 		Timer.delay(1);
+	 	}
+ 		
+ 		if(toggle) {
+ 			drive.moveTD(OI.left.getY(), OI.right.getY());
+ 		}
+ 		else {
+ 			drive.moveAD(OI.left.getY(), OI.left.getX());
+ 		}
+ 		}
+
+	 @Override
+	 protected boolean isFinished() {
+	  // TODO Auto-generated method stub
+	  return false;
+	 }
+
+	 @Override
+	 protected void end() {
+	  // TODO Auto-generated method stub
+	  
+	 }//the customary system sux
+	  // straight savage 
+
+	 @Override
+	 protected void interrupted() {
+	  // TODO Auto-generated method stub
+	  
+	 }
+}
