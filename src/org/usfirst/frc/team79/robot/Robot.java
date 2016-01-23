@@ -1,6 +1,7 @@
 package org.usfirst.frc.team79.robot;
 
 import org.usfirst.frc.team79.robot.commands.CommandBase;
+import org.usfirst.frc.team79.robot.commands.RotateIntake;
 import org.usfirst.frc.team79.robot.commands.Teleop;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -9,8 +10,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class Robot extends IterativeRobot {
 
     public void robotInit() {
-    	OI.init();
+    	RobotMap.init();
     	CommandBase.init();
+    	OI.init();
     }
 
     public void teleopInit() {
@@ -19,6 +21,7 @@ public class Robot extends IterativeRobot {
 
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        OI.rotateArm.whenPressed(new RotateIntake());
     }
     
     public void autonomousInit() {
