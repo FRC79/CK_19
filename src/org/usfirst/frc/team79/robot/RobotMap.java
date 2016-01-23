@@ -7,14 +7,22 @@ public class RobotMap {
 	public static int LEFTCONTROLLER = 0;
 	public static int RIGHTCONTROLLER = 1;
 	
+	public static int MOTORLEFTFRONT = 0;
+	public static int MOTORRIGHTFRONT = 3;
+	public static int MOTORLEFTBACK = 1;
+	public static int MOTORRIGHTBACK = 4;
 	
-	//	......(\_/)
-	//	......( '_')
-	//	..../""""""""""""\======░ ▒▓▓█D
-	//	/"""""""""""""""""""""""\
-	//	\_@_@_@_@_@_/
+	public static int INTAKEENCODERA = 8;
+	public static int INTAKEENCODERB = 9;
 	
-	public static int MOTORLEFT = 0;
-	public static int MOTORRIGHT = 1;
+	public static int INTAKEROLLER = 9;
+	public static int INTAKEFIRINGMOTOR = 8;
+	
+	public static int BANNERFRONT = 4;
+	public static int BANNERBACK = 5;
+	
+	public static void init() {
+		
+	}
 	
 }
