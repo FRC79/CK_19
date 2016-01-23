@@ -1,49 +1,39 @@
-package org.usfirst.frc.team79.robot.commands;
+package org.usfirst.frc.team79.robot.subsystems;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team79.robot.RobotMap;
 
-public class RotateIntake extends CommandBase {
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+public class FiringMechanism extends Subsystem {
 	
-	double encoderCurrent;
-	double duration = 10.0D;
+	public DigitalInput bannerFront;
+	public DigitalInput bannerBack;
 	
-	public RotateIntake() {
-		requires(intake);
+	public Victor intakeFire;
+	
+	public FiringMechanism() {
+		bannerFront = new DigitalInput(4);
+		bannerBack = new DigitalInput(5);
+		intakeFire = new Victor(RobotMap.INTAKEFIRINGMOTOR);
+	}
+	
+	public void setFireIntake(double direction) {
+		intakeFire.set(direction);
+	}
+	
+	public boolean isBallHeld() {
+		return (bannerFront.get() && bannerBack.get());
+	}
+	
+	public boolean isIntakeEmpty() {
+		return (!bannerFront.get() && !bannerBack.get());
 	}
 
 	@Override
-	protected void initialize() {
-		encoderCurrent = intake.getDistance();
-		setTimeout(duration);
-	}
-
-	@Override
-	protected void execute() {
+	protected void initDefaultCommand() {
 		
-        SmartDashboard.putDouble("revolutions?", intake.getDistance());
-        
-        if(intake.getDistance() <= encoderCurrent + 0.25) {
-            intake.rotate(0.1);
-        } else {
-        	intake.rotate(0.0);
-        }
-
-        
-	}
-
-	@Override
-	protected boolean isFinished() {
-		return isTimedOut();
-	}
-
-	@Override
-	protected void end() {
-		intake.rotate(0);
-	}
-
-	@Override
-	protected void interrupted() {
-	
 	}
 
 }
