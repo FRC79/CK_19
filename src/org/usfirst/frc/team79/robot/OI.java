@@ -1,6 +1,7 @@
 package org.usfirst.frc.team79.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -9,13 +10,17 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class OI {
 	
+	public static boolean controllerToggle;
+	
 	public static Joystick left, right;
-	public static JoystickButton toggle;
+	public static JoystickButton toggle, rotateArm, fire;
 	
 	public static void init() {
 		left = new Joystick(RobotMap.LEFTCONTROLLER);
 		right = new Joystick(RobotMap.RIGHTCONTROLLER);
-		toggle = new JoystickButton(left, 0);
+		toggle = new JoystickButton(left, 1);
+		rotateArm = new JoystickButton(left, 2);
+		fire = new JoystickButton(left, 3);
 	}
 	
 	public static double getLeft() {
@@ -31,7 +36,7 @@ public class OI {
 	}
 	
 	public static double getY() {
-		return left.getX();
+		return left.getY();
 	}
 
 }
