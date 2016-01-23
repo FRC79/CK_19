@@ -1,17 +1,28 @@
 package org.usfirst.frc.team79.robot.commands;
 
-import org.usfirst.frc.team79.robot.OI;
+import org.usfirst.frc.team79.robot.commands.firingstate.Firing;
+import org.usfirst.frc.team79.robot.commands.firingstate.Holding;
+import org.usfirst.frc.team79.robot.commands.firingstate.Intaking;
+import org.usfirst.frc.team79.robot.commands.firingstate.State;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Fire extends CommandBase {
 	
-	public boolean toggle = false;
-	public boolean firing = false;
+	State intakingState;
+	State holdingState;
+	State firingState;
+	
+	State state = intakingState;
 	
 	public Fire() {
+		
 		requires(fire);
+		
+		intakingState = new Intaking(this);
+		holdingState = new Holding(this);
+		firingState = new Firing(this);
+		
 	}
 
 	@Override
@@ -21,51 +32,39 @@ public class Fire extends CommandBase {
 
 	@Override
 	protected void execute() {
-		
-		SmartDashboard.putBoolean("BannerFront", fire.getFront());
-		SmartDashboard.putBoolean("BannerBack", fire.getBack());
-		
-		if(
-			(!fire.getFront() && !fire.getBack() && !toggle) || 
-			(fire.getFront() && !fire.getBack() && !toggle)
-		) {
-			
-			fire.setFireIntake(-1.0);
-			
-		}
-		
-		if(
-			(fire.getBack() && fire.getBack()) ||
-			(!fire.getBack() && fire.getFront() && toggle)
-			) {
-			
-			if(!toggle) {
-				fire.setFireIntake(0.0);
-			}
-			toggle = true;
-			
-		}
-		
-		if(toggle) {
-			
-			if(OI.fire.get()) {
-				firing = true;
-			}
-			
-			if(firing) {
-				fire.setFireIntake(1.0);
-			}
-			
-			if(!fire.getBack() && !fire.getFront()) {
-				toggle = false;
-				firing = false;
-				Timer.delay(2.0);
-			}
-			
-		}
+		SmartDashboard.putBoolean("Is the Intake Empty?", isIntakeEmpty());
+		SmartDashboard.putBoolean("Is the Ball Being Held?", isBallHeld());
+		state.execute();
+	}
 	
+	public boolean isBallHeld() {
+		return fire.isBallHeld();
+	}
+	
+	public boolean isIntakeEmpty() {
+		return fire.isIntakeEmpty();
 	}
 
+	public void setFireIntake(double speed) {
+		fire.setFireIntake(speed);
+	}
+	
+	public void setState(State state) {
+		this.state = state;
+	}
+	
+	public State getIntakingState() {
+		return intakingState;
+	}
+	
+	public State getHoldingState() {
+		return holdingState;
+	}
+	
+	public State getFiringState() {
+		return firingState;
+	}
+	
 	@Override
 	protected boolean isFinished() {
 		return false;
