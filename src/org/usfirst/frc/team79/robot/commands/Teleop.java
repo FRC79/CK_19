@@ -6,6 +6,7 @@ public class Teleop extends CommandGroup {
 
 	public Teleop() {
 		addParallel(new Drive());
+		addParallel(new Fire());
 	}
 	
 }
