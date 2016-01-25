@@ -1,30 +1,54 @@
 package org.usfirst.frc.team79.robot.commands;
 
-import org.usfirst.frc.team79.robot.OI;
+import org.usfirst.frc.team79.robot.commands.drivingstate.ArcadeState;
+import org.usfirst.frc.team79.robot.commands.drivingstate.State;
+import org.usfirst.frc.team79.robot.commands.drivingstate.TankState;
 
-public class TankDrive extends CommandBase {
+public class Drive extends CommandBase {
 	
-	boolean toggle;
+	State drivingArcadeState;
+	State drivingTankState;
+	State state;
+	
+	public Drive() {
+		
+		requires(driveTrain);
+		
+		drivingArcadeState = new ArcadeState(this);
+		drivingTankState = new TankState(this);
+		
+		state = drivingArcadeState;
+		
+	}
+	
+	public void setState(State state) {
+		this.state = state;
+	}
+	
+	public State getArcadeState() {
+		return drivingArcadeState;
+	}
+	
+	public State getTankState() {
+		return drivingTankState;
+	}
+
+	public void tankDrive(double left, double right) {
+		driveTrain.moveTank(left, right);
+	}
+	
+	public void arcadeDrive(double moveValue, double rotateValue) {
+		driveTrain.moveArcade(moveValue, rotateValue);
+	}
 	
 	@Override
 	protected void initialize() {
-		requires(driveTrain);
+		
 	}
 
 	@Override
 	protected void execute() {
-		
-		if(OI.toggle.get()) {
-			toggle = !toggle; // flippity floppity
-			Timer.delay(1.0); // waits for the driver to release the button
-		}
-		
-		if(toggle) {
-			driveTrain.moveTank(OI.getLeft(), OI.getRight());
-		} else if(!toggle) {
-			driveTrain.moveArcade(OI.getY(), OI.getX());
-		}
-		
+		state.execute();
 	}
 
 	@Override
