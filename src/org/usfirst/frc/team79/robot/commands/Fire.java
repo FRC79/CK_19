@@ -12,8 +12,8 @@ public class Fire extends CommandBase {
 	State intakingState;
 	State holdingState;
 	State firingState;
-	
-	State state = intakingState;
+
+	State state;
 	
 	public Fire() {
 		
@@ -22,6 +22,8 @@ public class Fire extends CommandBase {
 		intakingState = new Intaking(this);
 		holdingState = new Holding(this);
 		firingState = new Firing(this);
+		
+		state = intakingState;
 		
 	}
 
