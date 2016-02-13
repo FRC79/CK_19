@@ -1,61 +1,33 @@
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+package org.usfirst.frc.team79.robot;
+
+import org.usfirst.frc.team79.robot.commands.CommandBase;
+import org.usfirst.frc.team79.robot.commands.Teleop;
+import org.usfirst.frc.team79.robot.commands.Winch;
+
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class Robot extends IterativeRobot {
- SendableChooser arcadetrue;
-  SendableChooser arcadefalse;
-  SendableChooser auntonselector;
-  
-    Command enabled;
-    Command disabled;
 
-    CameraServer server;
-    
     public void robotInit() {
-     RobotMap.init();
-     
-        OI.init();
-        CommandBase.init();  
-        
-        auntonselector = new SendableChooser();
-        auntonselector.addObject("aunton", new autontime() );
-        SmartDashboard.putData("aunton!", auntonselector);
+    	RobotMap.init();
+    	CommandBase.init();
+    	OI.init();
+    }
 
-        server = CameraServer.getInstance();
-        server.setQuality(50);
-        server.startAutomaticCapture("cam0");
+    public void teleopInit() {
+    	new Teleop().start();
+    }
+
+    public void teleopPeriodic() {
+        Scheduler.getInstance().run();
+        OI.WinchStart.whenPressed(new Winch());
     }
     
- 
- public void disabledPeriodic() {
-  Scheduler.getInstance().run();
- }
-
     public void autonomousInit() {
     	
     }
 
-    public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
-        
-    }
-
-    public void teleopInit() {
-     new TeleopDrive().start();
-    }
-
-    public void disabledInit(){
-
-    }
-
-    public void teleopPeriodic() {
-    	
-     Scheduler.getInstance().run();
-     
-    }
-
-    public void testPeriodic() {
-    }
-}
     public void autonomousPeriodic() {
     	
     }
