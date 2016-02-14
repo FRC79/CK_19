@@ -24,8 +24,8 @@ public class RobotMap {
 	public static int INTAKEENCODERA = 8;
 	public static int INTAKEENCODERB = 9;
 	
-	public static int INTAKEROLLER = 9;
-	public static int INTAKEFIRINGMOTOR = 8;
+	public static int PLOWMOTOR = 8;
+	public static int INTAKEFIRINGMOTOR = 9;
 	
 	public static int BANNERFRONT = 4;
 	public static int BANNERBACK = 5;

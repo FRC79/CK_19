@@ -2,30 +2,30 @@ package org.usfirst.frc.team79.robot.subsystems;
 
 import org.usfirst.frc.team79.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
 	
-	Talon frontLeft;
-	Talon middleLeft;
-	Talon backLeft;
+	Victor frontLeft;
+	Victor middleLeft;
+	Victor backLeft;
 	
-	Talon frontRight;
-	Talon middleRight;
-	Talon backRight;
+	Victor frontRight;
+	Victor middleRight;
+	Victor backRight;
 	
 	public DriveTrain() {
-		frontLeft = new Talon(RobotMap.MOTORFRONTLEFT);
+		frontLeft = new Victor(RobotMap.MOTORFRONTLEFT);
 		frontLeft.setInverted(true);
-		middleLeft = new Talon(RobotMap.MOTORMIDDLELEFT);
+		middleLeft = new Victor(RobotMap.MOTORMIDDLELEFT);
 		middleLeft.setInverted(true);
-		backLeft = new Talon(RobotMap.MOTORBACKLEFT);
+		backLeft = new Victor(RobotMap.MOTORBACKLEFT);
 		backLeft.setInverted(true);
 		
-		frontRight = new Talon(RobotMap.MOTORFRONTRIGHT);
-		middleRight = new Talon(RobotMap.MOTORMIDDLRIGHT);
-		backRight = new Talon(RobotMap.MOTORBACKRIGHT);
+		frontRight = new Victor(RobotMap.MOTORFRONTRIGHT);
+		middleRight = new Victor(RobotMap.MOTORMIDDLRIGHT);
+		backRight = new Victor(RobotMap.MOTORBACKRIGHT);
 	}
 	
 	public void moveTank(double left, double right) {

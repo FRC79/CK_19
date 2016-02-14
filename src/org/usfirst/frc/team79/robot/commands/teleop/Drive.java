@@ -1,13 +1,12 @@
-package org.usfirst.frc.team79.robot.commands;
+package org.usfirst.frc.team79.robot.commands.teleop;
 
-import org.usfirst.frc.team79.robot.commands.drivingstate.ArcadeState;
-import org.usfirst.frc.team79.robot.commands.drivingstate.State;
-import org.usfirst.frc.team79.robot.commands.drivingstate.TankState;
+import org.usfirst.frc.team79.robot.commands.CommandBase;
+import org.usfirst.frc.team79.robot.commands.teleop.drivingstate.ArcadeState;
+import org.usfirst.frc.team79.robot.commands.teleop.drivingstate.State;
 
 public class Drive extends CommandBase {
 	
 	State drivingArcadeState;
-	State drivingTankState;
 	State state;
 	
 	public Drive() {
@@ -15,7 +14,6 @@ public class Drive extends CommandBase {
 		requires(driveTrain);
 		
 		drivingArcadeState = new ArcadeState(this);
-		drivingTankState = new TankState(this);
 		
 		state = drivingArcadeState;
 		
@@ -23,14 +21,6 @@ public class Drive extends CommandBase {
 	
 	public void setState(State state) {
 		this.state = state;
-	}
-	
-	public State getArcadeState() {
-		return drivingArcadeState;
-	}
-	
-	public State getTankState() {
-		return drivingTankState;
 	}
 
 	public void tankDrive(double left, double right) {

@@ -6,18 +6,20 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class IntakeMechanism extends Subsystem {
+public class PlowMechanism extends Subsystem {
 	
 	Encoder intakeEncoder;
 	Victor motor;
 	
-	public IntakeMechanism() {
+	double DISTPERPULSE = 0.00208768267d / 2.5; // gear ratio is (aproximately) 1 to 2
+	
+	public PlowMechanism() {
 		
-		motor = new Victor(RobotMap.INTAKEROLLER);
+		motor = new Victor(RobotMap.PLOWMOTOR);
 		
 		intakeEncoder = new Encoder(RobotMap.INTAKEENCODERA, RobotMap.INTAKEENCODERB);
 		intakeEncoder.setMaxPeriod(1.0);
-		intakeEncoder.setDistancePerPulse(0.00208768267D);
+		intakeEncoder.setDistancePerPulse(DISTPERPULSE);  // mult by 1.93 : 2 aproximately
 		intakeEncoder.reset();
 		
 	}

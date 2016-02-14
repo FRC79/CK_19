@@ -13,14 +13,21 @@ public class OI {
 	public static boolean controllerToggle;
 	
 	public static Joystick left, right;
-	public static JoystickButton toggle, rotateArm, fire;
+	public static Joystick gamePad;
+	public static JoystickButton toggle, rotateArm, firing, intaking, plowDown, plowUp;
 	
 	public static void init() {
 		left = new Joystick(RobotMap.LEFTCONTROLLER);
 		right = new Joystick(RobotMap.RIGHTCONTROLLER);
+		gamePad = new Joystick(3);
 		toggle = new JoystickButton(left, 1);
 		rotateArm = new JoystickButton(left, 2);
-		fire = new JoystickButton(left, 3);
+		
+		firing = new JoystickButton(gamePad, 3);
+		intaking = new JoystickButton(gamePad, 1);
+		plowDown = new JoystickButton(gamePad, 2);
+		plowUp = new JoystickButton(gamePad, 4);
+		
 	}
 	
 	public static double getLeft() {
