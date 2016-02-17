@@ -13,6 +13,8 @@ public class FiringMechanism extends Subsystem {
 	
 	public Victor intakeFire;
 	
+	public boolean fired;
+	
 	public FiringMechanism() {
 		bannerFront = new DigitalInput(4);
 		bannerBack = new DigitalInput(5);
@@ -29,6 +31,14 @@ public class FiringMechanism extends Subsystem {
 	
 	public boolean isIntakeEmpty() {
 		return (!bannerFront.get() && !bannerBack.get());
+	}
+	
+	public boolean isFired() {
+		return fired;
+	}
+	
+	public void setFired(boolean fired) {
+		this.fired = fired;
 	}
 
 	@Override

@@ -1,26 +1,29 @@
 package org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate;
 
-import org.usfirst.frc.team79.robot.commands.teleop.Manipulate;
+import org.usfirst.frc.team79.robot.subsystems.FiringMechanism;
+import org.usfirst.frc.team79.robot.subsystems.IntakeMechanism;
 
 public class PlowUp implements State {
 	
-	Manipulate manipulator;
+	FiringMechanism firingSystem;
+	IntakeMechanism intakeSystem;
 	
-	public PlowUp(Manipulate manipulator) {
-		this.manipulator = manipulator;
+	public PlowUp(FiringMechanism firingSystem, IntakeMechanism intakeSystem) {
+		this.firingSystem = firingSystem;
+		this.intakeSystem = intakeSystem;
 	}
 
 	@Override
 	public void execute() {
 		
-		manipulator.setFireIntake(0);
+		firingSystem.setFireIntake(0);
 		
-    	if(manipulator.getIntakeRotation() < 0f){
-    		manipulator.rotateIntake(-0.75f);
-    	} else if(manipulator.getIntakeRotation() > 0.2f) {
-    		manipulator.rotateIntake(0.75f);
-    	} else if(manipulator.getIntakeRotation() > 0f || manipulator.getIntakeRotation() < 0.2f) {
-    		manipulator.rotateIntake(0f);
+    	if(intakeSystem.getDistance() < 0f){
+    		intakeSystem.rotate(-0.75f);
+    	} else if(intakeSystem.getDistance() > 0.2f) {
+    		intakeSystem.rotate(0.75f);
+    	} else if(intakeSystem.getDistance() > 0f || intakeSystem.getDistance() < 0.2f) {
+    		intakeSystem.rotate(0f);
     	}
 		
 	}

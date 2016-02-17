@@ -2,39 +2,44 @@ package org.usfirst.frc.team79.robot.commands.teleop;
 
 import org.usfirst.frc.team79.robot.OI;
 import org.usfirst.frc.team79.robot.commands.CommandBase;
+import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.ButtonBindings;
 import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.Firing;
 import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.Intaking;
 import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.PlowDown;
 import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.PlowUp;
 import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.State;
 
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 public class Manipulate extends CommandBase {
 	
-	public State intakingState;
-	public State firingState;
-	public State plowDownState;
-	public State plowUpState;
-
-	boolean fireToggle;
-	boolean intakeToggle;
-	boolean upToggle;
-	boolean downToggle;
-	
-	public State state;
-	
+//	public State intakingState;
+//	public State firingState;
+//	public State plowDownState;
+//	public State plowUpState;
+//	
+	volatile State state;
+//	
 	public boolean fired = false;
+	
+//	private HashMap<State, JoystickButton> map = new HashMap<>();
 	
 	public Manipulate() {
 		
 		requires(fire);
 		requires(intake);
 		
-		intakingState = new Intaking(this);
-		firingState = new Firing(this);
-		plowDownState = new PlowDown(this);
-		plowUpState = new PlowUp(this);
+		State intakingState = new Intaking(fire, intake);
+		State firingState = new Firing(fire, intake);
+		State plowDownState = new PlowDown(fire, intake);
+		State plowUpState = new PlowUp(fire, intake);
+	
+		state = intakingState;
 		
-		state = plowUpState;
+		ButtonBindings.bind(firingState, OI.firing);
+		ButtonBindings.bind(intakingState, OI.intaking);
+		ButtonBindings.bind(plowDownState, OI.plowDown);
+		ButtonBindings.bind(plowUpState, OI.plowUp);
 		
 	}
 
@@ -46,64 +51,18 @@ public class Manipulate extends CommandBase {
 	@Override
 	protected void execute() {
 		
-		if(OI.firing.get()) {
-			fireToggle = true;
-		} else if(fireToggle && !OI.firing.get()) {
-			fireToggle = false;
-			setState(firingState);
+		for(ButtonBindings bindings : ButtonBindings.getCollection()) {
+			JoystickButton button = bindings.getButton();
+			if(button.get()) {
+				bindings.setToggle(true);
+			} else if(bindings.isToggle() && !button.get()) {
+				bindings.setToggle(false);
+				setState(bindings.getState());
+			}
 		}
-		
-		if(OI.intaking.get()) {
-			intakeToggle = true;
-		} else if(intakeToggle && !OI.intaking.get()) {
-			intakeToggle = false;
-			setState(intakingState);
-		}
-		
-		if(OI.plowUp.get()) {
-			upToggle = true;
-		} else if(upToggle && !OI.plowUp.get()) {
-			upToggle = false;
-			setState(plowUpState);
-		}
-		
-		if(OI.plowDown.get()) {
-			downToggle = true;
-		} else if(downToggle && !OI.plowDown.get()) {
-			downToggle = false;
-			setState(plowDownState);
-		}
-		
+	
 		state.execute();
 		
-	}
-	
-	public boolean hasFired() {
-		return fired;
-	}
-	
-	public void setFired(boolean val) {
-		fired = val;
-	}
-	
-	public boolean isBallHeld() {
-		return fire.isBallHeld();
-	}
-	
-	public boolean isIntakeEmpty() {
-		return fire.isIntakeEmpty();
-	}
-	
-	public double getIntakeRotation() {
-		return intake.getDistance();
-	}
-	
-	public void rotateIntake(double speed) {
-		intake.rotate(speed);
-	}
-
-	public void setFireIntake(double speed) {
-		fire.setFireIntake(speed);
 	}
 	
 	public void setState(State state) {

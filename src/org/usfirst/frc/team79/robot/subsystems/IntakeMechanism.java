@@ -6,14 +6,14 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class PlowMechanism extends Subsystem {
+public class IntakeMechanism extends Subsystem {
 	
 	Encoder intakeEncoder;
 	Victor motor;
 	
 	double DISTPERPULSE = 0.00208768267d / 2.5; // gear ratio is (aproximately) 1 to 2
 	
-	public PlowMechanism() {
+	public IntakeMechanism() {
 		
 		motor = new Victor(RobotMap.PLOWMOTOR);
 		

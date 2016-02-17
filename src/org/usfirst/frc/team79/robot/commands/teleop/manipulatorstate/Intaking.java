@@ -1,50 +1,53 @@
 package org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate;
 
-import org.usfirst.frc.team79.robot.commands.teleop.Manipulate;
+import org.usfirst.frc.team79.robot.subsystems.FiringMechanism;
+import org.usfirst.frc.team79.robot.subsystems.IntakeMechanism;
 
 public class Intaking implements State {
 	
-	Manipulate manipulator;
+	FiringMechanism firingSystem;
+	IntakeMechanism intakeSystem;
 	
-	public Intaking(Manipulate manipulator) {
-		this.manipulator = manipulator;
+	public Intaking(FiringMechanism firingMechanism, IntakeMechanism intakeSystem) {
+		this.firingSystem = firingMechanism;
+		this.intakeSystem = intakeSystem;
 	}
  
 	@Override
 	public void execute() {
 		
-		manipulator.setFired(false);
+		firingSystem.setFired(false);
 		
-    	if(manipulator.getIntakeRotation() < 0.4 ){
-    		if(manipulator.getIntakeRotation() < 0.45) {
-    			manipulator.rotateIntake(-0.2);
+    	if(intakeSystem.getDistance() < 0.4 ){
+    		if(intakeSystem.getDistance() < 0.45) {
+    			intakeSystem.rotate(-0.2);
     		} else {
-        		manipulator.rotateIntake(-0.5f);
+        		intakeSystem.rotate(-0.5f);
     		}
-    	} else if(manipulator.getIntakeRotation() > 0.6) {
-    		if(manipulator.getIntakeRotation() > 0.55) {
-    			manipulator.setFireIntake(0.2);
+    	} else if(intakeSystem.getDistance() > 0.6) {
+    		if(intakeSystem.getDistance() > 0.55) {
+    			firingSystem.setFireIntake(0.2);
     		} else {
-        		manipulator.rotateIntake(0.5);
+        		firingSystem.setFireIntake(0.5);
     		}
-    	} else if(manipulator.getIntakeRotation() > 0.4 || manipulator.getIntakeRotation() < 0.6) {
-    		manipulator.rotateIntake(0f);
+    	} else if(intakeSystem.getDistance() > 0.4 || intakeSystem.getDistance() < 0.6) {
+    		intakeSystem.rotate(0);
     	}
 		
-		if(manipulator.isIntakeEmpty()) {
-			manipulator.setFireIntake(-0.5);
+		if(firingSystem.isIntakeEmpty()) {
+			firingSystem.setFireIntake(-0.5);
 		}
 		
-		if(manipulator.isBallHeld()) {
+		if(firingSystem.isBallHeld()) {
 			
-			manipulator.setFireIntake(0);
+			firingSystem.setFireIntake(0);
 			
-	    	if(manipulator.getIntakeRotation() < 0f){
-	    		manipulator.rotateIntake(-0.75f);
-	    	} else if(manipulator.getIntakeRotation() > 0.2f) {
-	    		manipulator.rotateIntake(0.75f);
-	    	} else if(manipulator.getIntakeRotation() > 0f || manipulator.getIntakeRotation() < 0.2f) {
-	    		manipulator.rotateIntake(0f);
+	    	if(intakeSystem.getDistance() < 0f){
+	    		intakeSystem.rotate(-0.75f);
+	    	} else if(intakeSystem.getDistance() > 0.2f) {
+	    		intakeSystem.rotate(0.75f);
+	    	} else if(intakeSystem.getDistance() > 0f || intakeSystem.getDistance() < 0.2f) {
+	    		intakeSystem.rotate(0f);
 	    	}
 	    	
 		}

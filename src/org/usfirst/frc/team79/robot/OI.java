@@ -15,8 +15,10 @@ public class OI {
 	public static Joystick left, right;
 	public static Joystick gamePad;
 	public static JoystickButton toggle, rotateArm, firing, intaking, plowDown, plowUp;
+//	public static final JoystickButton[] TOGGLE_STATE = new JoystickButton[4];
 	
 	public static void init() {
+		
 		left = new Joystick(RobotMap.LEFTCONTROLLER);
 		right = new Joystick(RobotMap.RIGHTCONTROLLER);
 		gamePad = new Joystick(3);
@@ -27,6 +29,13 @@ public class OI {
 		intaking = new JoystickButton(gamePad, 1);
 		plowDown = new JoystickButton(gamePad, 2);
 		plowUp = new JoystickButton(gamePad, 4);
+		
+		/*
+		TOGGLE_STATE[0] = firing;
+		TOGGLE_STATE[1] = intaking;
+		TOGGLE_STATE[2] = plowDown;
+		TOGGLE_STATE[3] = plowUp;
+		*/
 		
 	}
 	
