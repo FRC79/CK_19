@@ -21,14 +21,24 @@ public class RobotMap {
 	public static int MOTORMIDDLRIGHT = 4;
 	public static int MOTORBACKRIGHT = 5;
 	
+	// Encoders 
+	
 	public static int INTAKEENCODERA = 8;
 	public static int INTAKEENCODERB = 9;
 	
-	public static int PLOWMOTOR = 8;
-	public static int INTAKEFIRINGMOTOR = 9;
+	// Shooter Mechanism motors
+	
+	public static int INTAKEMOTOR = 8;
+	public static int FIRINGMOTOR = 9;
+	
+	// Banner Sensors
 	
 	public static int BANNERFRONT = 4;
 	public static int BANNERBACK = 5;
+	
+	// Limit Switches
+	
+	public static int LIMITARM = 11;
 	
 	public static void init() {
 		

@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class GyroSystem extends Subsystem {
 	
+	// do we even have a gyro on the bot right now?
+	
 	public AnalogGyro gyro;
 	
 	public GyroSystem() {

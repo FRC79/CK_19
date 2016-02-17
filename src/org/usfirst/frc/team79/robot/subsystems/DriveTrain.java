@@ -2,10 +2,17 @@ package org.usfirst.frc.team79.robot.subsystems;
 
 import org.usfirst.frc.team79.robot.RobotMap;
 
+// the subsystem that controlls the wheels on the ground
+
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
+	
+	// can you believe we actually have six victors on this bot
+	// I had to write an acceleration curve for the throttle
+	// so that the drivers couldn't blow the main fuse
+	// when these motors started pulling current
 	
 	Victor frontLeft;
 	Victor middleLeft;
@@ -15,7 +22,9 @@ public class DriveTrain extends Subsystem {
 	Victor middleRight;
 	Victor backRight;
 	
+	// mapping out all of the control motors for the train
 	public DriveTrain() {
+		// need to invert the left side
 		frontLeft = new Victor(RobotMap.MOTORFRONTLEFT);
 		frontLeft.setInverted(true);
 		middleLeft = new Victor(RobotMap.MOTORMIDDLELEFT);
@@ -23,11 +32,15 @@ public class DriveTrain extends Subsystem {
 		backLeft = new Victor(RobotMap.MOTORBACKLEFT);
 		backLeft.setInverted(true);
 		
+		// the right's good though
 		frontRight = new Victor(RobotMap.MOTORFRONTRIGHT);
 		middleRight = new Victor(RobotMap.MOTORMIDDLRIGHT);
 		backRight = new Victor(RobotMap.MOTORBACKRIGHT);
 	}
 	
+	// pretty self explanatory
+	// moves one half of the drivetrain one value
+	// and the other half the other
 	public void moveTank(double left, double right) {
 		frontLeft.set(left);
 		middleLeft.set(right);
@@ -38,9 +51,11 @@ public class DriveTrain extends Subsystem {
 		backRight.set(right);
 	}
 	
+	// custom rolled arcade code written by tooling through the native arcade drive class
 	public void moveArcade(double moveValue, double rotateValue) {
 		
 		if(moveValue > 0) {
+			
 			if(rotateValue > 0) {
 
 				// when move is 1, and rotate is zero, left goes backward
@@ -70,7 +85,9 @@ public class DriveTrain extends Subsystem {
 				backRight.set(moveValue + rotateValue);
 				
 			}
+			
 		} else {
+			
 			if(rotateValue > 0 ) {
 				
 				// move = 0, rotate = 1, left goes backwards
@@ -100,10 +117,14 @@ public class DriveTrain extends Subsystem {
 				backRight.set(-Math.max(-moveValue, -rotateValue));
 				
 			}
+			
 		}
 		
 	}
 
+	// this method here has always annoyed me
+	// we have literally never used it
+	// ever
 	@Override
 	protected void initDefaultCommand() {
 		

@@ -2,6 +2,7 @@ package org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate;
 
 import org.usfirst.frc.team79.robot.subsystems.FiringMechanism;
 import org.usfirst.frc.team79.robot.subsystems.IntakeMechanism;
+import org.usfirst.frc.team79.robot.utilities.State;
 
 public class Intaking implements State {
 	
@@ -16,40 +17,52 @@ public class Intaking implements State {
 	@Override
 	public void execute() {
 		
+		// execute is the handshake between the state interface and this class
+		// it lets every other object know it can call execute on a State
+		// and it will be guaranteed to contain an execute method
+		
+		// now that we're intaking again, we say that a ball hasn't been fired
+		// so we can than call our fire state and have it check the finished firing loop
 		firingSystem.setFired(false);
 		
-    	if(intakeSystem.getDistance() < 0.4 ){
-    		if(intakeSystem.getDistance() < 0.45) {
-    			intakeSystem.rotate(-0.2);
-    		} else {
-        		intakeSystem.rotate(-0.5f);
+		// setting the distance rotated as a human readable value
+		double armRotation = intakeSystem.getDistance();
+		
+		// if the rotation is less than 0.45, we rotate forward
+	   	if(armRotation < 0.45 ){
+    		
+			intakeSystem.rotate(-0.5f);
+
+		// if the rotation is less than 0.4, than we slow down some
+		// to eliminate unwanted oscillation
+    		if(armRotation < 0.4) {
+    			intakeSystem.rotate(-0.4f);
     		}
-    	} else if(intakeSystem.getDistance() > 0.6) {
-    		if(intakeSystem.getDistance() > 0.55) {
-    			firingSystem.setFireIntake(0.2);
-    		} else {
-        		firingSystem.setFireIntake(0.5);
+
+		// if the rotation is greater than 0.6, we rotate backwards
+    	} else if(armRotation > 0.6) {
+
+			firingSystem.setFireIntake(0.75f);
+
+		// we do the same fidelity trick here too
+    		if(armRotation > 0.55) {
+    			firingSystem.setFireIntake(0.6f);
     		}
-    	} else if(intakeSystem.getDistance() > 0.4 || intakeSystem.getDistance() < 0.6) {
-    		intakeSystem.rotate(0);
+
+		// lastly, we check if its in between these two conditions
+		// and if it is, we stop
+    	} else if(armRotation > 0.35 || armRotation < 0.55) {
+	    		intakeSystem.rotate(0f);
     	}
 		
+	   	// if the feed is empty, start intaking
 		if(firingSystem.isIntakeEmpty()) {
-			firingSystem.setFireIntake(-0.5);
+			firingSystem.setFireIntake(-1.0);
 		}
 		
+		// if we've got a ball, stop intaking
 		if(firingSystem.isBallHeld()) {
-			
-			firingSystem.setFireIntake(0);
-			
-	    	if(intakeSystem.getDistance() < 0f){
-	    		intakeSystem.rotate(-0.75f);
-	    	} else if(intakeSystem.getDistance() > 0.2f) {
-	    		intakeSystem.rotate(0.75f);
-	    	} else if(intakeSystem.getDistance() > 0f || intakeSystem.getDistance() < 0.2f) {
-	    		intakeSystem.rotate(0f);
-	    	}
-	    	
+			firingSystem.setFireIntake(0);	
 		}
 		
 		

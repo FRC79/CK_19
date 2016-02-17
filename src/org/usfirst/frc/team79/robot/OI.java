@@ -14,7 +14,7 @@ public class OI {
 	
 	public static Joystick left, right;
 	public static Joystick gamePad;
-	public static JoystickButton toggle, rotateArm, firing, intaking, plowDown, plowUp;
+	public static JoystickButton toggle, rotateArm, firing, intaking, plowDown, plowUp, calibrate;
 //	public static final JoystickButton[] TOGGLE_STATE = new JoystickButton[4];
 	
 	public static void init() {
@@ -30,14 +30,25 @@ public class OI {
 		plowDown = new JoystickButton(gamePad, 2);
 		plowUp = new JoystickButton(gamePad, 4);
 		
-		/*
-		TOGGLE_STATE[0] = firing;
-		TOGGLE_STATE[1] = intaking;
-		TOGGLE_STATE[2] = plowDown;
-		TOGGLE_STATE[3] = plowUp;
-		*/
+		calibrate = new JoystickButton(gamePad, 5);
 		
 	}
+	
+	public static boolean getDPadLeft() {
+		return(gamePad.getRawAxis(5) < -0.5);
+	}
+	
+	public static boolean getDPadRight() {
+		return(gamePad.getRawAxis(5) > 0.5); 
+	}
+	
+//	public static boolean getDPadUp() {
+//		return(gamePad.getRawAxis(6) < -0.5);
+//	}
+//	
+//	public static boolean getDPadDown() {
+//		return(gamePad.getRawAxis(6) > 0.5);
+//	}
 	
 	public static double getLeft() {
 		return left.getY();

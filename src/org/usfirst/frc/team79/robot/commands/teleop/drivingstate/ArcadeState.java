@@ -2,19 +2,17 @@ package org.usfirst.frc.team79.robot.commands.teleop.drivingstate;
 
 import org.usfirst.frc.team79.robot.OI;
 import org.usfirst.frc.team79.robot.commands.teleop.Drive;
+import org.usfirst.frc.team79.robot.utilities.State;
 
 import edu.wpi.first.wpilibj.Timer;
 
 public class ArcadeState implements State {
 	
-	boolean buttonToggle = false;
-	
-	double currentSpeedY;
-	double currentSpeedX;
+	Drive driveMechanism;
+	double accelMoveX;
+	double accelMoveY;
 	double joyX;
 	double joyY;
-	
-	Drive driveMechanism;
 	
 	public ArcadeState(Drive driveMechanism) {
 		this.driveMechanism = driveMechanism;
@@ -23,15 +21,21 @@ public class ArcadeState implements State {
 	@Override
 	public void execute() {	
 		
+		// Fibonacci acceleration curve
+		// when the drivers floor the throttle
+		// its impossible to blow the main fuse
+		// also I don't know how to spell Fibonacci
+		// a google query has confirmed that I have indeed, spelled it correctly
+		// huh, cool
+		
 		joyX = OI.getX();
 		joyY = OI.getY();
 		
-		currentSpeedX = (((joyX - currentSpeedX) / 2) + currentSpeedX);
-		currentSpeedY = (((joyY - currentSpeedY) / 2) + currentSpeedY);
+		accelMoveX = (((joyX - accelMoveX) / 2) + accelMoveX);
+		accelMoveY = (((joyY - accelMoveY) / 2) + accelMoveY);
+		driveMechanism.arcadeDrive(accelMoveX, accelMoveY);
 		
-		driveMechanism.arcadeDrive(currentSpeedY, currentSpeedX);
-		
-		Timer.delay(0.1f);
+		Timer.delay(0.1);
 		
 	}
 

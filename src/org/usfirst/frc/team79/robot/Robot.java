@@ -10,12 +10,13 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class Robot extends IterativeRobot {
 
+	CameraServer server;
+	
     public void robotInit() {
     	RobotMap.init();
     	CommandBase.init();
     	OI.init();
     	
-    	CameraServer server;
     	server = CameraServer.getInstance();
     	server.setQuality(100);
     	server.startAutomaticCapture("cam0");
@@ -26,7 +27,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopPeriodic() {
-        Scheduler.getInstance().run();
+    	Scheduler.getInstance().run();
     }
     
     public void autonomousInit() {

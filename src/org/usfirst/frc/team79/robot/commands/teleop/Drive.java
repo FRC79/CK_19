@@ -2,7 +2,7 @@ package org.usfirst.frc.team79.robot.commands.teleop;
 
 import org.usfirst.frc.team79.robot.commands.CommandBase;
 import org.usfirst.frc.team79.robot.commands.teleop.drivingstate.ArcadeState;
-import org.usfirst.frc.team79.robot.commands.teleop.drivingstate.State;
+import org.usfirst.frc.team79.robot.utilities.State;
 
 public class Drive extends CommandBase {
 	

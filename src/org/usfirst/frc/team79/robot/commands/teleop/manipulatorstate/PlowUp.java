@@ -2,6 +2,7 @@ package org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate;
 
 import org.usfirst.frc.team79.robot.subsystems.FiringMechanism;
 import org.usfirst.frc.team79.robot.subsystems.IntakeMechanism;
+import org.usfirst.frc.team79.robot.utilities.State;
 
 public class PlowUp implements State {
 	
@@ -16,13 +17,23 @@ public class PlowUp implements State {
 	@Override
 	public void execute() {
 		
+		// I'm getting tired of typing
+		// hopefully you just went through the manipulator state package alphabetically
+		// and already got everything you needed out of it
+		
+		double armRotation = intakeSystem.getDistance();
+		
 		firingSystem.setFireIntake(0);
 		
-    	if(intakeSystem.getDistance() < 0f){
+		if(intakeSystem.getLimit()) {
+			intakeSystem.reset();
+		}
+		
+    	if(armRotation < -0.1f){
     		intakeSystem.rotate(-0.75f);
-    	} else if(intakeSystem.getDistance() > 0.2f) {
+    	} else if(armRotation > 0.1f) {
     		intakeSystem.rotate(0.75f);
-    	} else if(intakeSystem.getDistance() > 0f || intakeSystem.getDistance() < 0.2f) {
+    	} else if(armRotation > -0.1 || armRotation < 0.1f) {
     		intakeSystem.rotate(0f);
     	}
 		
