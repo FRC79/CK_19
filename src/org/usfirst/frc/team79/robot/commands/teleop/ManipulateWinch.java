@@ -3,6 +3,8 @@ package org.usfirst.frc.team79.robot.commands.teleop;
 import org.usfirst.frc.team79.robot.OI;
 import org.usfirst.frc.team79.robot.commands.CommandBase;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class ManipulateWinch extends CommandBase {
 	
 	// very immature
@@ -18,10 +20,15 @@ public class ManipulateWinch extends CommandBase {
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void execute() {
+		
+		SmartDashboard.putDouble("Encoder for winch extend, distend", winch.getExtendDistance());
+		SmartDashboard.putDouble("Encoder value for arm rotation", winch.getArmRotationDistance());
 		winch.extend(OI.gamePad.getX());
-		winch.rotate(OI.gamePad.getY()/2);
+		winch.rotate(OI.gamePad.getY());
+		
 	}
 
 	@Override

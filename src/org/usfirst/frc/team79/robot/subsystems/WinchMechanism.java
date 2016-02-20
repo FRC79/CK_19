@@ -10,6 +10,7 @@ public class WinchMechanism extends Subsystem {
 	// expect to change some
 	
 	Encoder winchArmEncoder;
+	Encoder winchExtendEncoder;
 	
 	Victor push, pull;
 	Victor rotator;
@@ -27,14 +28,24 @@ public class WinchMechanism extends Subsystem {
 		winchArmEncoder.setDistancePerPulse(DISTPERPULSE);  // mult by 1.93 : 2 aproximately
 		winchArmEncoder.reset();
 		
+		winchExtendEncoder = new Encoder(12, 13);
+//		winchExtendEncoder.setMaxPeriod(1.0);
+//		winchExtendEncoder.setDistancePerPulse(DISTPERPULSE);
+		winchExtendEncoder.reset();
+		
 	}
 	
 	public void rotate(double speed) {
 		rotator.set(speed);
 	}
 	
-	public double getDistance() {
+	public double getArmRotationDistance() {
 		return winchArmEncoder.getDistance();
+		//moving down down is positive;
+	}
+	
+	public double getExtendDistance() {
+		return winchExtendEncoder.getDistance();
 	}
 	
 	public void extend(double speed) {

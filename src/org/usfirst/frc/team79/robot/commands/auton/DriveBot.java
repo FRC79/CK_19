@@ -20,7 +20,7 @@ public class DriveBot extends CommandBase {
 
 	@Override
 	protected void execute() {
-		move(speed);
+		move(-speed);
 	}
 	
 	protected void move(double speed) {

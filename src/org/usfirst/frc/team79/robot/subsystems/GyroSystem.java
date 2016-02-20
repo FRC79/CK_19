@@ -11,6 +11,7 @@ public class GyroSystem extends Subsystem {
 	
 	public GyroSystem() {
 		gyro = new AnalogGyro(0);
+		resetGyro();
 	}
 	
 	public double getGyroAngle() {
@@ -20,6 +21,7 @@ public class GyroSystem extends Subsystem {
 	public void resetGyro() {
 		gyro.reset();
 	}
+	
 	@Override
 	protected void initDefaultCommand() {
 		

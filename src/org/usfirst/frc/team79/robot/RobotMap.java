@@ -21,6 +21,9 @@ public class RobotMap {
 	public static int MOTORMIDDLRIGHT = 4;
 	public static int MOTORBACKRIGHT = 5;
 	
+	public static int WINCH_EXTEND;
+	public static int WINCH_EXTEND_OPPOSITE;
+	
 	// Encoders 
 	
 	public static int INTAKEENCODERA = 8;

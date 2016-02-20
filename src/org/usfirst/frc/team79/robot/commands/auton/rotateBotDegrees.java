@@ -24,32 +24,22 @@ public class rotateBotDegrees extends CommandBase {
 	}
 	
 	public void rotateDegrees(double degrees) {
-		if(degrees < 0.0 && Math.abs(gyro.getGyroAngle()) <= Math.abs(degrees)) {
+		
+		if(degrees < gyro.getGyroAngle()) {
 			driveTrain.moveTank(1, -1);
-		} else if(degrees > 0.0 && (gyro.getGyroAngle() <= degrees)) {
+		} else if(degrees > gyro.getGyroAngle()) {
 			driveTrain.moveTank(-1, 1);
-		} else {
-			end();
+		} 
+		
+		if(degrees > gyro.getGyroAngle() - 5 && degrees < gyro.getGyroAngle() + 5) {
+			driveTrain.moveTank(0, 0);
 		}
+		
 	}
-	
-//	public void rotateDegrees(double degrees) {
-//		if(degrees < 0.0) {
-//			while(Math.abs(gyro.getGyroAngle()) <= Math.abs(degrees)) {
-////				SmartDashboard.putDouble("GyroAngle", gyro.getGyroAngle());
-//				driveTrain.moveTank(0.5, -0.5);
-//			}
-//		} else {
-//			while(gyro.getGyroAngle() <= degrees) {
-////				SmartDashboard.putDouble("GyroAngle", gyro.getGyroAngle());
-//				driveTrain.moveTank(-0.5, 0.5);
-//			}
-//		}
-//	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return (degrees > gyro.getGyroAngle() - 5 && degrees < gyro.getGyroAngle() + 5);
 	}
 
 	@Override

@@ -2,6 +2,8 @@ package org.usfirst.frc.team79.robot.commands.auton;
 
 import org.usfirst.frc.team79.robot.commands.CommandBase;
 
+import edu.wpi.first.wpilibj.Timer;
+
 public class FireBall extends CommandBase {
 
 	public FireBall() {
@@ -15,13 +17,12 @@ public class FireBall extends CommandBase {
 
 	@Override
 	protected void execute() {
-//		if(!fire.isIntakeEmpty()) {
-//			fire.setFireIntake(1.0);
-//		} else {
-//			Timer.delay(0.5);
-//			fire.setFireIntake(0);
-//		}
-		fire.setFireIntake(1.0);
+		if(!fire.isIntakeEmpty()) {
+			fire.setFireIntake(1.0);
+		} else {
+			Timer.delay(0.5);
+			fire.setFireIntake(0);
+		}
 	}
 	
 	@Override

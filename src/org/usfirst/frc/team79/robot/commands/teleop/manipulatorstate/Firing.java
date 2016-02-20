@@ -11,6 +11,8 @@ public class Firing implements State {
 	FiringMechanism firingSystem;
 	IntakeMechanism intakeSystem;
 	
+	double currentTime;
+	
 	boolean hasFired = false;
 	
 	// this constructor allows the subsystem objects to be referenced from inside this class
@@ -29,28 +31,31 @@ public class Firing implements State {
 		// the rotational value of the arm currently.
 		// value is currently arbitrary, as the arm goes through a gear change
 		// 1.0 means that the motor driving the arm has made one full rotation
-		double armRotation = intakeSystem.getDistance();
+		
+		
+//		double armRotation = intakeSystem.getDistance();
 		
 		
 		// if at any iteration, the limit switch is pressed, than we reset the encoder
-		if(intakeSystem.getLimit()) {
-			intakeSystem.reset();
-		}
-		
-		// if the rotation is less than negative 0.1, than we rotate the system forward
-    	if(armRotation < -0.1f){
-    		intakeSystem.rotate(-0.75f);;
-		// if the rotation is greater than 0.1, than we rotate the arm backward
-    	} else if(armRotation > 0.1f) {
-    		intakeSystem.rotate(0.75f);
-		// if the value is in between these two, than we stop the rotator
-    	} else if(armRotation > -0.1f || armRotation < 0.1f) {
-    		intakeSystem.rotate(0);
-    	}
+//		if(intakeSystem.getLimit()) {
+//			intakeSystem.reset();
+//		}
+//		
+//		// if the rotation is less than negative 0.1, than we rotate the system forward
+//    	if(armRotation < -0.1){
+//    		intakeSystem.rotate(-0.75f);;
+//		// if the rotation is greater than 0.1, than we rotate the arm backward
+//    	} else if(armRotation > 0.1) {
+//    		intakeSystem.rotate(0.75f);
+//		// if the value is in between these two, than we stop the rotator
+//    	} else if(armRotation > -0.1 && armRotation < 0.1) {
+//    		intakeSystem.rotate(0);
+//    	}
 		
     	// if the intake is not empty, and the arm is in position, than we fire
-		if(!firingSystem.isIntakeEmpty() && (armRotation > -0.1f || armRotation < 0.1f)) {
+		if(!firingSystem.isIntakeEmpty()) {
 			firingSystem.setFireIntake(1.0);
+			currentTime = Timer.getFPGATimestamp();
 		}
 		
 		// if the intake is empty, and the robot has not already fired a ball
@@ -61,8 +66,9 @@ public class Firing implements State {
 		// because than there would be an unnecessary 2 second delay on every call to this commands execute 
 		if(firingSystem.isIntakeEmpty() && !firingSystem.isFired()) {
 			firingSystem.setFired(true);
-			Timer.delay(2.0);
-			firingSystem.setFireIntake(0);
+			if(Timer.getFPGATimestamp() >= currentTime+2.0) {
+				firingSystem.setFireIntake(0);
+			}
 		}
 		
 	}

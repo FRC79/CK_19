@@ -1,7 +1,7 @@
 package org.usfirst.frc.team79.robot;
 
 import org.usfirst.frc.team79.robot.commands.CommandBase;
-import org.usfirst.frc.team79.robot.commands.auton.Auton;
+import org.usfirst.frc.team79.robot.commands.auton.AutonA;
 import org.usfirst.frc.team79.robot.commands.teleop.Teleop;
 
 import edu.wpi.first.wpilibj.CameraServer;
@@ -31,7 +31,7 @@ public class Robot extends IterativeRobot {
     }
     
     public void autonomousInit() {
-    	new Auton().start();
+    	new AutonA().start();
     }
 
     public void autonomousPeriodic() {

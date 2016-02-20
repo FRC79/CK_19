@@ -33,13 +33,14 @@ public class PlowDown implements State {
 		// as to what it does
 		// if you've read the firing class's comments
 		// hopefully
-    	if(armRotation < 0.7){
-    		intakeSystem.rotate(-0.75f);
-    	} else if(armRotation > 0.9f) {
-    		intakeSystem.rotate(0.75f);
-    	} else if(armRotation > 0.7f || armRotation < 0.9f) {
+    	if(armRotation < 0.8){
+    		intakeSystem.rotate(-1.0f);
+    	} else if(armRotation > 1.0) {
+    		intakeSystem.rotate(1.0f);
+    	} else if(armRotation > 0.8 && armRotation < 1.0) {
     		intakeSystem.rotate(0f); 
     	}
+    	
 	}
 
 }

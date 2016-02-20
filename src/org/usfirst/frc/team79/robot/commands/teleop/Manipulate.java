@@ -5,6 +5,7 @@ import org.usfirst.frc.team79.robot.commands.CommandBase;
 import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.Calibrate;
 import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.Firing;
 import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.Intaking;
+import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.Null;
 import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.PlowDown;
 import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.PlowUp;
 import org.usfirst.frc.team79.robot.utilities.ButtonBindings;
@@ -47,6 +48,7 @@ public class Manipulate extends CommandBase {
 		// polymorphism, n00bs
 		State intakingState = new Intaking(fire, intake);
 		State firingState = new Firing(fire, intake);
+		State nullState = new Null();
 		State plowDownState = new PlowDown(fire, intake);
 		State plowUpState = new PlowUp(fire, intake);
 		State calibrationState = new Calibrate(fire, intake);
@@ -87,7 +89,7 @@ public class Manipulate extends CommandBase {
 		// for each of the bindings in ButtonBindings bindings
 		// we call getCollection
 		// which returns the value pair for each of the bindings
-		// that are in the beans hashmap
+		// that are in the bean's hashmap
 		for(ButtonBindings bindings : ButtonBindings.getCollection()) {
 			// and than we say that the current button we're polling
 			// is this current bindings.getButton()
@@ -106,7 +108,7 @@ public class Manipulate extends CommandBase {
 			}
 		}
 		
-		SmartDashboard.putDouble("revolutiona", intake.getDistance());
+		SmartDashboard.putDouble("revolutions for plow arm", intake.getDistance());
 		
 		// now we call that state's internal execute function
 		// which handles all of the gross branching code of a state

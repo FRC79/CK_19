@@ -25,35 +25,45 @@ public class Intaking implements State {
 		// so we can than call our fire state and have it check the finished firing loop
 		firingSystem.setFired(false);
 		
-		// setting the distance rotated as a human readable value
+//		 setting the distance rotated as a human readable value
+		
 		double armRotation = intakeSystem.getDistance();
 		
 		// if the rotation is less than 0.45, we rotate forward
-	   	if(armRotation < 0.45 ){
-    		
-			intakeSystem.rotate(-0.5f);
+		if(intakeSystem.getLimit()) {
+			intakeSystem.rotate(0);
+			intakeSystem.reset();
+		} else {
+		   	if(armRotation < 0.1 ){
+				firingSystem.setFireIntake(0);
+				intakeSystem.rotate(-1.0f);
 
-		// if the rotation is less than 0.4, than we slow down some
-		// to eliminate unwanted oscillation
-    		if(armRotation < 0.4) {
-    			intakeSystem.rotate(-0.4f);
-    		}
+			// if the rotation is less than 0.4, than we slow down some
+			// to eliminate unwanted oscillation
+	    		if(armRotation < 0.15) {
+	    			intakeSystem.rotate(-0.9f);
+	    		}
 
-		// if the rotation is greater than 0.6, we rotate backwards
-    	} else if(armRotation > 0.6) {
+			// if the rotation is greater than 0.6, we rotate backwards
+	    	}
+		   	
+		   	if(armRotation > -0.1) {
 
-			firingSystem.setFireIntake(0.75f);
+				intakeSystem.rotate(1.0f);
 
-		// we do the same fidelity trick here too
-    		if(armRotation > 0.55) {
-    			firingSystem.setFireIntake(0.6f);
-    		}
+			// we do the same fidelity trick here too
+	    		if(armRotation > -0.05) {
+	    			intakeSystem.rotate(0.9f);
+	    		}
 
-		// lastly, we check if its in between these two conditions
-		// and if it is, we stop
-    	} else if(armRotation > 0.35 || armRotation < 0.55) {
-	    		intakeSystem.rotate(0f);
-    	}
+			// lastly, we check if its in between these two conditions
+			// and if it is, we stop
+	    	} 
+		   	
+		   	if(armRotation > -0.1 && armRotation < 0.1) {
+		    		intakeSystem.rotate(0f);
+	    	}
+		}
 		
 	   	// if the feed is empty, start intaking
 		if(firingSystem.isIntakeEmpty()) {

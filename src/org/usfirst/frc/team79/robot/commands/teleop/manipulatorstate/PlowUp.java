@@ -26,16 +26,19 @@ public class PlowUp implements State {
 		firingSystem.setFireIntake(0);
 		
 		if(intakeSystem.getLimit()) {
+			intakeSystem.rotate(0);
 			intakeSystem.reset();
+		} else {
+	    	if(armRotation < -0.1){
+	    		intakeSystem.rotate(-1.0f);
+	    	} else if(armRotation > 0.1) {
+	    		intakeSystem.rotate(1.0f);
+	    	} else if(armRotation < -0.1 && armRotation > 0.1) {
+	    		intakeSystem.rotate(0f);
+	    	}
 		}
 		
-    	if(armRotation < -0.1f){
-    		intakeSystem.rotate(-0.75f);
-    	} else if(armRotation > 0.1f) {
-    		intakeSystem.rotate(0.75f);
-    	} else if(armRotation > -0.1 || armRotation < 0.1f) {
-    		intakeSystem.rotate(0f);
-    	}
+
 		
 	}
 

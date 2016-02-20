@@ -33,7 +33,15 @@ public class ArcadeState implements State {
 		
 		accelMoveX = (((joyX - accelMoveX) / 2) + accelMoveX);
 		accelMoveY = (((joyY - accelMoveY) / 2) + accelMoveY);
-		driveMechanism.arcadeDrive(accelMoveX, accelMoveY);
+		driveMechanism.arcadeDrive(accelMoveY, accelMoveX);
+		
+		if(joyX == 0) {
+			accelMoveX = 0;
+		}
+		
+		if(joyY == 0) {
+			accelMoveY = 0;
+		}
 		
 		Timer.delay(0.1);
 		
