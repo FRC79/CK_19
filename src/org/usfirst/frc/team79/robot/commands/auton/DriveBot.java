@@ -5,26 +5,32 @@ import org.usfirst.frc.team79.robot.commands.CommandBase;
 public class DriveBot extends CommandBase {
 	
 	double speed;
+	double left, right;
 	double duration;
 	
-	public DriveBot(double speed, double duration) {
+	public DriveBot(double timeOut) {
 		requires(driveTrain);
-		this.speed = speed;
-		this.duration = duration;
+		setTimeout(duration);
+	}
+	
+	public DriveBot(double left, double right, double timeOut) {
+		this(timeOut);
+		this.left = left;
+		this.right = right;
 	}
 
 	@Override
 	protected void initialize() {
-		setTimeout(duration);
+		
 	}
 
 	@Override
 	protected void execute() {
-		move(-speed);
+		move(-left, -right);
 	}
 	
-	protected void move(double speed) {
-		driveTrain.moveTank(speed, speed);
+	protected void move(double left, double right) {
+		driveTrain.moveTank(left, right);
 	}
 
 	@Override

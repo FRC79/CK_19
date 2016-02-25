@@ -17,13 +17,7 @@ public class FiringMechanism extends Subsystem {
 	// motor to control the actual firing/intaking motor
 	
 	public Victor intakeFire;
-	
-	// god dang firing boolean
-	// now its in the subststem
-	// Sunni please
-	// this just isn't right...
-	public boolean fired;
-	
+		
 	// create the mechanism object
 	public FiringMechanism() {
 		bannerFront = new DigitalInput(4);
@@ -48,15 +42,15 @@ public class FiringMechanism extends Subsystem {
 		return (bannerFront.get() && bannerBack.get());
 	}
 	
-	// stupid getter for the fired boolean
-	public boolean isFired() {
-		return fired;
-	}
+//	// stupid getter for the fired boolean
+//	public boolean isFired() {
+//		return fired;
+//	}
 	
-	// stupid setter for the fired boolean
-	public void setFired(boolean fired) {
-		this.fired = fired;
-	}
+//	// stupid setter for the fired boolean
+//	public void setFired(boolean fired) {
+//		this.fired = fired;
+//	}
 
 	// again, we literally never use this
 	@Override

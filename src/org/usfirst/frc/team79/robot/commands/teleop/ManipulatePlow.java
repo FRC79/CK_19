@@ -2,25 +2,16 @@ package org.usfirst.frc.team79.robot.commands.teleop;
 
 import org.usfirst.frc.team79.robot.OI;
 import org.usfirst.frc.team79.robot.commands.CommandBase;
-import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.Calibrate;
 import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.Firing;
 import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.Intaking;
-import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.Null;
 import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.PlowDown;
 import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.PlowUp;
 import org.usfirst.frc.team79.robot.utilities.ButtonBindings;
 import org.usfirst.frc.team79.robot.utilities.State;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Manipulate extends CommandBase {
-	
-//	public State intakingState;
-//	public State firingState;
-//	public State plowDownState;
-//	public State plowUpState;
-//	
+public class ManipulatePlow extends CommandBase {
 	
 	// here we're declaring a default state called state
 	// this is the state we're going to call execute on
@@ -29,12 +20,10 @@ public class Manipulate extends CommandBase {
 	
 	// I hate that this machine still needs a boolean called from outside of it's respective state
 	// but if I touch anything to try and "fix" this quasi dirty bit
-	// Sunni's going to kill me
-	public boolean fired = false;
-	
+	// Sunni's going to kill me	
 	
 	// We construct a manipulate object
-	public Manipulate() {
+	public ManipulatePlow() {
 		
 		// we say that these subsystems are needed
 		requires(fire);
@@ -48,15 +37,13 @@ public class Manipulate extends CommandBase {
 		// polymorphism, n00bs
 		State intakingState = new Intaking(fire, intake);
 		State firingState = new Firing(fire, intake);
-		State nullState = new Null();
 		State plowDownState = new PlowDown(fire, intake);
 		State plowUpState = new PlowUp(fire, intake);
-		State calibrationState = new Calibrate(fire, intake);
 	
 		// we set the default state to the calibration state
 		// so that when teleop creates this object as part of a command group
 		// it calibrates the arm
-		state = calibrationState;
+		state = plowUpState;
 		
 		// okay, here is where some magic happens
 		// I'm binding different buttons to the different states we have here
@@ -69,7 +56,6 @@ public class Manipulate extends CommandBase {
 		ButtonBindings.bind(intakingState, OI.intaking);
 		ButtonBindings.bind(plowDownState, OI.plowDown);
 		ButtonBindings.bind(plowUpState, OI.plowUp);
-		ButtonBindings.bind(calibrationState, OI.calibrate);
 		
 	}
 
@@ -78,8 +64,6 @@ public class Manipulate extends CommandBase {
 	protected void initialize() {
 
 	}
-
-	@SuppressWarnings("deprecation")
 	
 	// and we now call the commands native execute method
 	@Override
@@ -107,13 +91,7 @@ public class Manipulate extends CommandBase {
 				setState(bindings.getState());
 			}
 		}
-		
-		SmartDashboard.putDouble("revolutions for plow arm", intake.getDistance());
-		
-		// now we call that state's internal execute function
-		// which handles all of the gross branching code of a state
-		// and effectively encapsulates all of the relevent state code
-		// to that state
+
 		state.execute();
 		
 	}

@@ -2,17 +2,14 @@ package org.usfirst.frc.team79.robot.subsystems;
 
 import org.usfirst.frc.team79.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Encoder;
+
 // the subsystem that controlls the wheels on the ground
 
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
-	
-	// can you believe we actually have six victors on this bot
-	// I had to write an acceleration curve for the throttle
-	// so that the drivers couldn't blow the main fuse
-	// when these motors started pulling current
 	
 	Victor frontLeft;
 	Victor middleLeft;
@@ -21,6 +18,9 @@ public class DriveTrain extends Subsystem {
 	Victor frontRight;
 	Victor middleRight;
 	Victor backRight;
+	
+	Encoder leftWheelEncoder;
+	Encoder rightWheelEncoder;
 	
 	// mapping out all of the control motors for the train
 	public DriveTrain() {
@@ -36,6 +36,10 @@ public class DriveTrain extends Subsystem {
 		frontRight = new Victor(RobotMap.MOTORFRONTRIGHT);
 		middleRight = new Victor(RobotMap.MOTORMIDDLRIGHT);
 		backRight = new Victor(RobotMap.MOTORBACKRIGHT);
+		
+		leftWheelEncoder = new Encoder(RobotMap.LEFT_WHEEL_ENCODER_A, RobotMap.LEFT_WHEEL_ENCODER_B);
+		rightWheelEncoder = new Encoder(RobotMap.RIGHT_WHEEL_ENCODER_A, RobotMap.RIGHT_WHEEL_ENCODER_B);
+		
 	}
 	
 	// pretty self explanatory
@@ -120,6 +124,14 @@ public class DriveTrain extends Subsystem {
 			
 		}
 		
+	}
+	
+	public double getLeftEncoder() {
+		return leftWheelEncoder.getDistance();
+	}
+	
+	public double getRightEncoder() {
+		return rightWheelEncoder.getDistance();
 	}
 
 	// this method here has always annoyed me

@@ -1,15 +1,17 @@
 package org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate;
 
 import org.usfirst.frc.team79.robot.subsystems.FiringMechanism;
-import org.usfirst.frc.team79.robot.subsystems.IntakeMechanism;
+import org.usfirst.frc.team79.robot.subsystems.PlowMechanism;
 import org.usfirst.frc.team79.robot.utilities.State;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class Intaking implements State {
 	
 	FiringMechanism firingSystem;
-	IntakeMechanism intakeSystem;
+	PlowMechanism intakeSystem;
 	
-	public Intaking(FiringMechanism firingMechanism, IntakeMechanism intakeSystem) {
+	public Intaking(FiringMechanism firingMechanism, PlowMechanism intakeSystem) {
 		this.firingSystem = firingMechanism;
 		this.intakeSystem = intakeSystem;
 	}
@@ -23,47 +25,8 @@ public class Intaking implements State {
 		
 		// now that we're intaking again, we say that a ball hasn't been fired
 		// so we can than call our fire state and have it check the finished firing loop
-		firingSystem.setFired(false);
 		
-//		 setting the distance rotated as a human readable value
-		
-		double armRotation = intakeSystem.getDistance();
-		
-		// if the rotation is less than 0.45, we rotate forward
-		if(intakeSystem.getLimit()) {
-			intakeSystem.rotate(0);
-			intakeSystem.reset();
-		} else {
-		   	if(armRotation < 0.1 ){
-				firingSystem.setFireIntake(0);
-				intakeSystem.rotate(-1.0f);
-
-			// if the rotation is less than 0.4, than we slow down some
-			// to eliminate unwanted oscillation
-	    		if(armRotation < 0.15) {
-	    			intakeSystem.rotate(-0.9f);
-	    		}
-
-			// if the rotation is greater than 0.6, we rotate backwards
-	    	}
-		   	
-		   	if(armRotation > -0.1) {
-
-				intakeSystem.rotate(1.0f);
-
-			// we do the same fidelity trick here too
-	    		if(armRotation > -0.05) {
-	    			intakeSystem.rotate(0.9f);
-	    		}
-
-			// lastly, we check if its in between these two conditions
-			// and if it is, we stop
-	    	} 
-		   	
-		   	if(armRotation > -0.1 && armRotation < 0.1) {
-		    		intakeSystem.rotate(0f);
-	    	}
-		}
+		intakeSystem.set(Value.kForward);
 		
 	   	// if the feed is empty, start intaking
 		if(firingSystem.isIntakeEmpty()) {

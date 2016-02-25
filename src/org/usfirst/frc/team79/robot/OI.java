@@ -14,7 +14,7 @@ public class OI {
 	
 	public static Joystick left, right;
 	public static Joystick gamePad;
-	public static JoystickButton toggle, rotateArm, firing, intaking, plowDown, plowUp, calibrate;
+	public static JoystickButton toggle, rotateArm, firing, intaking, plowDown, plowUp, calibrate, winchArmToggle;
 //	public static final JoystickButton[] TOGGLE_STATE = new JoystickButton[4];
 	
 	public static void init() {
@@ -31,6 +31,8 @@ public class OI {
 		plowUp = new JoystickButton(gamePad, 4);
 		
 		calibrate = new JoystickButton(gamePad, 5);
+		
+		winchArmToggle = new JoystickButton(gamePad, 7);
 		
 	}
 	

@@ -13,7 +13,7 @@ public class Drive extends CommandBase {
 		
 		requires(driveTrain);
 		
-		drivingArcadeState = new ArcadeState(this);
+		drivingArcadeState = new ArcadeState(driveTrain);
 		
 		state = drivingArcadeState;
 		
@@ -21,14 +21,6 @@ public class Drive extends CommandBase {
 	
 	public void setState(State state) {
 		this.state = state;
-	}
-
-	public void tankDrive(double left, double right) {
-		driveTrain.moveTank(left, right);
-	}
-	
-	public void arcadeDrive(double moveValue, double rotateValue) {
-		driveTrain.moveArcade(moveValue, rotateValue);
 	}
 	
 	@Override

@@ -17,31 +17,51 @@ public class RobotMap {
 	public static int MOTORFRONTLEFT = 0;
 	public static int MOTORMIDDLELEFT = 1;
 	public static int MOTORBACKLEFT = 2;
+	
 	public static int MOTORFRONTRIGHT = 3;
 	public static int MOTORMIDDLRIGHT = 4;
 	public static int MOTORBACKRIGHT = 5;
 	
-	public static int WINCH_EXTEND;
-	public static int WINCH_EXTEND_OPPOSITE;
+	// winch elevation motors
+	
+	public static int WINCH_EXTEND = 6;
+	public static int WINCH_EXTEND_OPPOSITE = 7;
+	
+	// Solenoids
+	
+	public static int PLOW_SOLENOID_A = 4;
+	public static int PLOW_SOLENOID_B = 5;
+	
+	public static int WINCH_SOLENOID_A = 6;
+	public static int WINCH_SOLENOID_B = 7;
 	
 	// Encoders 
 	
-	public static int INTAKEENCODERA = 8;
-	public static int INTAKEENCODERB = 9;
+	public static int LEFT_WHEEL_ENCODER_A = 0;
+	public static int LEFT_WHEEL_ENCODER_B = 1;
 	
-	// Shooter Mechanism motors
-	
-	public static int INTAKEMOTOR = 8;
-	public static int FIRINGMOTOR = 9;
+	public static int RIGHT_WHEEL_ENCODER_A = 2;
+	public static int RIGHT_WHEEL_ENCODER_B = 3;
+
+	public static int WINCH_ELEVATION_ENCODER_A = 9;
+	public static int WINCH_ELEVATION_ENCODER_B = 8;
 	
 	// Banner Sensors
 	
 	public static int BANNERFRONT = 4;
 	public static int BANNERBACK = 5;
 	
-	// Limit Switches
+	// Shooter Mechanism motors
+
+	public static int FIRINGMOTOR = 9;
 	
-	public static int LIMITARM = 11;
+	// Potentiometers
+	
+	public static int WINCH_ELEVATION_POTENTIOMETER = 1;
+	
+	// Limits
+	
+	public static int LIMIT_BOTTOM_ELEVATOR = 8;
 	
 	public static void init() {
 		

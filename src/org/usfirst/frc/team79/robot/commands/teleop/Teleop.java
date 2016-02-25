@@ -8,7 +8,7 @@ public class Teleop extends CommandGroup {
 
 	public Teleop() {
 		addParallel(new Drive());
-		addParallel(new Manipulate());
+		addParallel(new ManipulatePlow());
 		addParallel(new ManipulateWinch());
 	}
 	

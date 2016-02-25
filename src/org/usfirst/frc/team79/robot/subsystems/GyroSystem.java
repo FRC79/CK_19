@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class GyroSystem extends Subsystem {
 	
-	// do we even have a gyro on the bot right now?
+	double setAngle;
 	
 	public AnalogGyro gyro;
 	
@@ -15,16 +15,16 @@ public class GyroSystem extends Subsystem {
 	}
 	
 	public double getGyroAngle() {
-		return gyro.getAngle();
+		return -gyro.getAngle();
 	}
 
 	public void resetGyro() {
 		gyro.reset();
 	}
-	
+		
 	@Override
 	protected void initDefaultCommand() {
 		
 	}
-
+	
 }
