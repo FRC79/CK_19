@@ -4,14 +4,14 @@ import org.usfirst.frc.team79.robot.commands.CommandBase;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class rotateBotDegrees extends CommandBase {
+public class RotateToDegree extends CommandBase {
 	
 	double degrees;
 	
-	public rotateBotDegrees(double degrees) {
+	public RotateToDegree(double degrees) {
 		
 		requires(gyro);
-		requires(driveTrain);
+		requires(drivetrain);
 		
 		this.degrees = degrees;
 		
@@ -31,10 +31,20 @@ public class rotateBotDegrees extends CommandBase {
 		SmartDashboard.putDouble("Gyro Value in Degrees", gyroReadout);
 		
 		if(degrees < gyroReadout) {
-			driveTrain.moveTank(1.0, -1.0);
+			if(gyroReadout < degrees - 10) {
+				drivetrain.moveTank(0.6, -0.6);
+			} else {
+				drivetrain.moveTank(1.0, -1.0);
+			}
 		} else if(degrees > gyroReadout) {
-			driveTrain.moveTank(-1.0, 1.0);
+			if(gyroReadout > degrees + 10) {
+				drivetrain.moveTank(-0.6, 0.6);
+			} else {
+				drivetrain.moveTank(-1.0, 1.0);
+			}
 		}
+		
+		SmartDashboard.putDouble("Gyro Angel", gyro.getGyroAngle());
 		
 	}
 
@@ -45,7 +55,7 @@ public class rotateBotDegrees extends CommandBase {
 
 	@Override
 	protected void end() {
-		driveTrain.moveTank(0, 0);
+		drivetrain.moveTank(0, 0);
 	}
 
 	@Override

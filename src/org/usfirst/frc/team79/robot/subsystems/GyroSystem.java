@@ -15,7 +15,7 @@ public class GyroSystem extends Subsystem {
 	}
 	
 	public double getGyroAngle() {
-		return -gyro.getAngle();
+		return -(gyro.getAngle());
 	}
 
 	public void resetGyro() {

@@ -11,19 +11,20 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
 	
-	Victor frontLeft;
-	Victor middleLeft;
-	Victor backLeft;
+	private Victor frontLeft;
+	private Victor middleLeft;
+	private Victor backLeft;
 	
-	Victor frontRight;
-	Victor middleRight;
-	Victor backRight;
+	private Victor frontRight;
+	private Victor middleRight;
+	private Victor backRight;
 	
 	Encoder leftWheelEncoder;
 	Encoder rightWheelEncoder;
 	
 	// mapping out all of the control motors for the train
 	public DriveTrain() {
+		
 		// need to invert the left side
 		frontLeft = new Victor(RobotMap.MOTORFRONTLEFT);
 		frontLeft.setInverted(true);
@@ -42,17 +43,25 @@ public class DriveTrain extends Subsystem {
 		
 	}
 	
+	public double getLeftSet() {
+		return backLeft.get();
+	}
+	
+	public double getRightSet() {
+		return backRight.get();
+	}
+	
 	// pretty self explanatory
 	// moves one half of the drivetrain one value
 	// and the other half the other
 	public void moveTank(double left, double right) {
-		frontLeft.set(left);
-		middleLeft.set(right);
-		backLeft.set(left);
+		frontLeft.set(-left);
+		middleLeft.set(-left);
+		backLeft.set(-left);
 		
-		frontRight.set(right);
-		middleRight.set(right);
-		backRight.set(right);
+		frontRight.set(-right);
+		middleRight.set(-right);
+		backRight.set(-right);
 	}
 	
 	// custom rolled arcade code written by tooling through the native arcade drive class
@@ -133,10 +142,12 @@ public class DriveTrain extends Subsystem {
 	public double getRightEncoder() {
 		return rightWheelEncoder.getDistance();
 	}
-
-	// this method here has always annoyed me
-	// we have literally never used it
-	// ever
+	
+	public void resetEncoders() {
+		leftWheelEncoder.reset();
+		rightWheelEncoder.reset();
+	}
+	
 	@Override
 	protected void initDefaultCommand() {
 		

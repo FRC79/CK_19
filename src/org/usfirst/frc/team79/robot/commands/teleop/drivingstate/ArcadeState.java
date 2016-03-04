@@ -5,7 +5,6 @@ import org.usfirst.frc.team79.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team79.robot.utilities.State;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ArcadeState implements State {
 	
@@ -21,7 +20,6 @@ public class ArcadeState implements State {
 		this.drive = drive;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void execute() {	
 
@@ -131,10 +129,7 @@ public class ArcadeState implements State {
 			}
 			
 		}
-		
-		SmartDashboard.putDouble("Left DriveTrain Encoder", drive.getLeftEncoder());
-		SmartDashboard.putDouble("Right DriveTrain Encoder", drive.getRightEncoder());
-		
+				
 	}
 
 }

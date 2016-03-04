@@ -17,14 +17,14 @@ public abstract class CommandBase extends Command {
 	// because you can actually say that each written command 
 	// is a CommandBase because of its lineage
 	
-	public static DriveTrain driveTrain;	
+	public static DriveTrain drivetrain;	
 	public static PlowMechanism intake;
 	public static FiringMechanism fire;
 	public static GyroSystem gyro;
 	public static WinchMechanism winch;
 	
 	public static void init() {
-		driveTrain = new DriveTrain();
+		drivetrain = new DriveTrain();
 		intake = new PlowMechanism();
 		fire = new FiringMechanism();
 		gyro = new GyroSystem();

@@ -2,10 +2,11 @@ package org.usfirst.frc.team79.robot.commands.auton;
 
 import org.usfirst.frc.team79.robot.commands.CommandBase;
 
-import edu.wpi.first.wpilibj.Timer;
-
 public class FireBall extends CommandBase {
-
+	
+	private boolean fired;
+	private long lastFiringTime;
+	
 	public FireBall() {
 		requires(fire);
 	}
@@ -17,11 +18,17 @@ public class FireBall extends CommandBase {
 
 	@Override
 	protected void execute() {
-		if(!fire.isIntakeEmpty()) {
-			fire.setFireIntake(1.0);
-		} else {
-			Timer.delay(0.5);
-			fire.setFireIntake(0);
+		if(!fired) {
+			long currentTime = System.currentTimeMillis();
+			if(!fire.isIntakeEmpty()) {
+				fire.setFireIntake(1.0);
+				lastFiringTime = System.currentTimeMillis();
+			} else {
+				if(currentTime >= lastFiringTime || currentTime < lastFiringTime) {
+					fire.setFireIntake(0);
+					fired = true;
+				}
+			}
 		}
 	}
 	

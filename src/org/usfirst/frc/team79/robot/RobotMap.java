@@ -37,11 +37,13 @@ public class RobotMap {
 	
 	// Encoders 
 	
-	public static int LEFT_WHEEL_ENCODER_A = 0;
-	public static int LEFT_WHEEL_ENCODER_B = 1;
+	// move back for comp bot
 	
-	public static int RIGHT_WHEEL_ENCODER_A = 2;
-	public static int RIGHT_WHEEL_ENCODER_B = 3;
+	public static int LEFT_WHEEL_ENCODER_A = 3;
+	public static int LEFT_WHEEL_ENCODER_B = 2;
+	
+	public static int RIGHT_WHEEL_ENCODER_A = 0;
+	public static int RIGHT_WHEEL_ENCODER_B = 1;
 
 	public static int WINCH_ELEVATION_ENCODER_A = 9;
 	public static int WINCH_ELEVATION_ENCODER_B = 8;
