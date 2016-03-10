@@ -17,8 +17,6 @@ public class RecordDrivetrain extends CommandBase implements ThreadKillable {
 	
 	private boolean buttonToggle = false;
 	
-	private long referenceTime;
-	
 	private AtomicBoolean doneStatus = new AtomicBoolean();
 	
 	// dataQueue acts as a threadSafe membrane between the main application and the writer thread
@@ -32,16 +30,12 @@ public class RecordDrivetrain extends CommandBase implements ThreadKillable {
 		
 		dataQueue = new LinkedBlockingQueue<DataBean>();
 		consumer = new DataWriter(dataQueue, this);
-		
-		referenceTime = System.currentTimeMillis();
 
 	}
 
 	@Override
 	protected void execute() {
-		
-		long currentTime = System.currentTimeMillis();
-		
+				
 		if(!startedLogging) {
 			listenBegin();
 		} else if(!endedLogging){
@@ -50,16 +44,8 @@ public class RecordDrivetrain extends CommandBase implements ThreadKillable {
 			// do absolutely nothing
 		}
 		
-		if(startedLogging && !endedLogging) {
-			double trainLeft = drivetrain.getLeftSet();
-			double trainRight = drivetrain.getRightSet();
-			if(currentTime >= referenceTime + 100 || currentTime < referenceTime) {
-				dataQueue.add(new DataBean(trainLeft, trainRight));
-				referenceTime = currentTime;
-			}
-		}
-		
 		drivetrain.moveArcade(OI.getY(), OI.getX());
+		dataQueue.add(new DataBean(OI.getY(), OI.getX()));
 
 	}
 	

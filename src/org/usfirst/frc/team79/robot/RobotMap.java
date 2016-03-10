@@ -65,6 +65,15 @@ public class RobotMap {
 	
 	public static int LIMIT_BOTTOM_ELEVATOR = 8;
 	
+	// Servos
+	
+	public static int STOP_SERVO = 12;
+	
+	// Sonar
+	
+	public static int PING_CHANNEL = 23;
+	public static int ECHO_CHANNEL = 24;
+	
 	public static void init() {
 		
 	}

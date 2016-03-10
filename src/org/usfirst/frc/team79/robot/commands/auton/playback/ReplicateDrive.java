@@ -20,6 +20,8 @@ public class ReplicateDrive extends CommandBase implements ThreadKillable {
 	private boolean isFinished = false;
 	
 	private long referenceTime;
+	
+	private double y, x;
 
 	public ReplicateDrive() {
 		
@@ -35,14 +37,17 @@ public class ReplicateDrive extends CommandBase implements ThreadKillable {
 	@Override
 	protected void execute() {
 		
+		drivetrain.moveArcade(y, x);
+		
 		if(!isDone() || !dataQueue.isEmpty()) {
 			long currentTime = System.currentTimeMillis();
-			if(currentTime >= referenceTime + 100 || currentTime < referenceTime) {
+			if(currentTime >= referenceTime + 20 || currentTime < referenceTime) {
 				referenceTime = currentTime;
 				if(!dataQueue.isEmpty()) {
 					try {
 						DataBean data = dataQueue.take();
-						drivetrain.moveArcade(data.getLeft(), data.getRight());
+						y = data.getLeft();
+						x = data.getRight();
 					} catch (InterruptedException e) {
 						// shouldn't ever happen
 						// we make the sanity checks before getting here

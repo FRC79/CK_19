@@ -18,17 +18,19 @@ public abstract class CommandBase extends Command {
 	// is a CommandBase because of its lineage
 	
 	public static DriveTrain drivetrain;	
-	public static PlowMechanism intake;
-	public static FiringMechanism fire;
+	public static PlowMechanism plow;
+	public static FiringMechanism cannon;
 	public static GyroSystem gyro;
 	public static WinchMechanism winch;
+//	public static SonarMechanism sonar;
 	
 	public static void init() {
 		drivetrain = new DriveTrain();
-		intake = new PlowMechanism();
-		fire = new FiringMechanism();
+		plow = new PlowMechanism();
+		cannon = new FiringMechanism();
 		gyro = new GyroSystem();
 		winch = new WinchMechanism();
+//		sonar = new SonarMechanism();
 	}
 
 	public CommandBase(String name) {

@@ -14,7 +14,6 @@ public class Drive extends CommandBase {
 	public Drive() {
 		
 		requires(drivetrain);
-		requires(gyro);
 		
 		drivingArcadeState = new ArcadeState(drivetrain);
 		
@@ -35,17 +34,9 @@ public class Drive extends CommandBase {
 	@Override
 	protected void execute() {
 		state.execute();
-		SmartDashboard.putDouble("Left encoder in Feet", getLeftDistanceFeet());
-		SmartDashboard.putDouble("Right Encoder Feet", getRightDistanceFeet());
+		SmartDashboard.putDouble("Left encoder in Feet", drivetrain.getLeftEncoder());
+		SmartDashboard.putDouble("Right Encoder Feet", drivetrain.getRightEncoder());
 		SmartDashboard.putDouble("Gyro degrees", gyro.getGyroAngle());
-	}
-
-	public double getLeftDistanceFeet() {
-		return ((drivetrain.getLeftEncoder() * 25.13) / 254) / 12;
-	}
-	
-	public double getRightDistanceFeet() {
-		return ((drivetrain.getRightEncoder() * 25.13) / 254) / 12;
 	}
 	
 	@Override

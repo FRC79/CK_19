@@ -8,8 +8,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ManipulateWinch extends CommandBase {
 
-	boolean toggle;
-	boolean buttonToggle;
+	boolean pneumaticToggle;
+	boolean pneumaticButtonToggle;
+	boolean servoToggle;
+	boolean servoButtonToggle;
+	
+	boolean servoEngaged;
 	
 	double ELEVATION_MAX = 0.51;
 	
@@ -25,35 +29,55 @@ public class ManipulateWinch extends CommandBase {
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void execute() {
+				
+		listenPneumaticToggle();
+		listenMoveArm();
+		listenEngageServo();
 		
-		double joyValue = OI.getY();
-		boolean joystickForward = !(joyValue > 0); // joystick moving up registers as a negative value, and down registers as a positive value
 		
-		if(OI.winchArmToggle.get() && !buttonToggle) {
-			buttonToggle = true;
-		} else if(!OI.winchArmToggle.get() && buttonToggle) {
-			buttonToggle = false;
-			winch.set(toggle ? Value.kForward : Value.kReverse);
-			toggle = !toggle;
+		SmartDashboard.putDouble("Elevation Potentiometer Value", winch.getElevationValue());
+		SmartDashboard.putBoolean("Limit Switch for elevation stop", winch.getLimit());
+		SmartDashboard.getBoolean("Is the servo stop engaged ?", servoEngaged);
+		
+	}
+	
+	private void listenPneumaticToggle() {
+		
+		if(OI.winchArmToggle.get() && !pneumaticButtonToggle) {
+			pneumaticButtonToggle = true;
+		} else if(!OI.winchArmToggle.get() && pneumaticButtonToggle) {
+			pneumaticButtonToggle = false;
+			winch.set(pneumaticToggle ? Value.kForward : Value.kReverse);
+			pneumaticToggle = !pneumaticToggle;
 		}
 		
-		// if the joystick is positive, and we're below the string pots max
+	}
+	
+	private void listenMoveArm() {
+		
+		double joyValue = OI.getY();
+		boolean joystickForward = !(joyValue > 0);
+		
 		if(joystickForward && winch.getElevationValue() < ELEVATION_MAX) {
-		// we set the elevation motors to the joystick's value
 			winch.elevate(joyValue);
-		// if the joystick is negative, and the limit switch isn't triggered
 		} else if(!joystickForward && !winch.getLimit()) {
-		// we set the elevation motors to the joysticl's value
 			winch.elevate(joyValue);
-		// if the joystick is positive, and we're above the max
-		// or the joystick is negative and we've flipped the switch
-		// than kill the motors
 		} else {
 			winch.elevate(0);
 		}
 		
-		SmartDashboard.putDouble("Elevation Potentiometer Value", winch.getElevationValue());
-		SmartDashboard.putBoolean("Limit Switch for elevation stop", winch.getLimit());
+	}
+	
+	private void listenEngageServo() {
+		
+		if(OI.servoStopToggle.get() && !servoButtonToggle) {
+			servoButtonToggle = true;
+		} else if(!OI.servoStopToggle.get() && servoButtonToggle) {
+			servoButtonToggle = false;
+			servoToggle = !servoToggle;
+			winch.setServo(servoToggle ? 30 : 0);
+			servoEngaged = !servoEngaged;
+		}
 		
 	}
 

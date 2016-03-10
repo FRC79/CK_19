@@ -11,8 +11,7 @@ public class RotateToDegree extends CommandBase {
 	public RotateToDegree(double degrees) {
 		
 		requires(gyro);
-		requires(drivetrain);
-		
+		requires(drivetrain);	
 		this.degrees = degrees;
 		
 	}
@@ -32,19 +31,17 @@ public class RotateToDegree extends CommandBase {
 		
 		if(degrees < gyroReadout) {
 			if(gyroReadout < degrees - 10) {
-				drivetrain.moveTank(0.6, -0.6);
-			} else {
-				drivetrain.moveTank(1.0, -1.0);
-			}
-		} else if(degrees > gyroReadout) {
-			if(gyroReadout > degrees + 10) {
 				drivetrain.moveTank(-0.6, 0.6);
 			} else {
 				drivetrain.moveTank(-1.0, 1.0);
 			}
+		} else if(degrees > gyroReadout) {
+			if(gyroReadout > degrees + 10) {
+				drivetrain.moveTank(0.6, -0.6);
+			} else {
+				drivetrain.moveTank(1.0, -1.0);
+			}
 		}
-		
-		SmartDashboard.putDouble("Gyro Angel", gyro.getGyroAngle());
 		
 	}
 
@@ -56,6 +53,7 @@ public class RotateToDegree extends CommandBase {
 	@Override
 	protected void end() {
 		drivetrain.moveTank(0, 0);
+		drivetrain.resetEncoders();
 	}
 
 	@Override

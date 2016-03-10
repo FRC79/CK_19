@@ -54,6 +54,11 @@ public class DriveTrain extends Subsystem {
 	// pretty self explanatory
 	// moves one half of the drivetrain one value
 	// and the other half the other
+	// 
+	// NOTE
+	// joystick inputs on the y axis down as positive, up as negative
+	// so we invert all of the input set calls
+	// logitech Y ?
 	public void moveTank(double left, double right) {
 		frontLeft.set(-left);
 		middleLeft.set(-left);
@@ -136,11 +141,13 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public double getLeftEncoder() {
-		return leftWheelEncoder.getDistance();
+//		return leftWheelEncoder.getDistance();
+		return ((leftWheelEncoder.getDistance() * 25.13) / 254) / 12;
 	}
 	
 	public double getRightEncoder() {
-		return rightWheelEncoder.getDistance();
+//		return rightWheelEncoder.getDistance();
+		return ((rightWheelEncoder.getDistance() * 25.13) / 254) / 12;
 	}
 	
 	public void resetEncoders() {

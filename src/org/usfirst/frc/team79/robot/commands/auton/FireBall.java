@@ -8,7 +8,7 @@ public class FireBall extends CommandBase {
 	private long lastFiringTime;
 	
 	public FireBall() {
-		requires(fire);
+		requires(cannon);
 	}
 
 	@Override
@@ -20,12 +20,12 @@ public class FireBall extends CommandBase {
 	protected void execute() {
 		if(!fired) {
 			long currentTime = System.currentTimeMillis();
-			if(!fire.isIntakeEmpty()) {
-				fire.setFireIntake(1.0);
-				lastFiringTime = System.currentTimeMillis();
+			if(!cannon.isIntakeEmpty()) {
+				cannon.setFireIntake(1.0);
+				lastFiringTime = currentTime;
 			} else {
-				if(currentTime >= lastFiringTime || currentTime < lastFiringTime) {
-					fire.setFireIntake(0);
+				if(currentTime >= lastFiringTime + 2 || currentTime < lastFiringTime) {
+					cannon.setFireIntake(0);
 					fired = true;
 				}
 			}
@@ -34,7 +34,7 @@ public class FireBall extends CommandBase {
 	
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return fired;
 	}
 
 	@Override

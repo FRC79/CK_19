@@ -6,6 +6,7 @@ import org.usfirst.frc.team79.robot.utilities.LimitSwitch;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -16,6 +17,7 @@ public class WinchMechanism extends Subsystem {
 	Victor elevatorComplement;
 	AnalogPotentiometer elevationPot;
 	LimitSwitch lowerStop;	
+	Servo stopServo;
 	
 	public WinchMechanism() {
 		elevator = new Victor(RobotMap.WINCH_EXTEND);
@@ -24,6 +26,7 @@ public class WinchMechanism extends Subsystem {
 		elevationPot = new AnalogPotentiometer(RobotMap.WINCH_ELEVATION_POTENTIOMETER);
 		wincher.set(Value.kReverse);
 		lowerStop = new LimitSwitch(RobotMap.LIMIT_BOTTOM_ELEVATOR);
+		stopServo = new Servo(RobotMap.STOP_SERVO);
 	}
 	
 	public void elevate(double speed) {
@@ -41,6 +44,10 @@ public class WinchMechanism extends Subsystem {
 	
 	public double getElevationValue() {
 		return elevationPot.get();
+	}
+	
+	public void setServo(double degrees) {
+		stopServo.setAngle(degrees);
 	}
 	
 	@Override

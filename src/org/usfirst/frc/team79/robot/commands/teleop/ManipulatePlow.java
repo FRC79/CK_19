@@ -26,8 +26,8 @@ public class ManipulatePlow extends CommandBase {
 	public ManipulatePlow() {
 		
 		// we say that these subsystems are needed
-		requires(fire);
-		requires(intake);
+		requires(cannon);
+		requires(plow);
 		
 		// here we declare our different states
 		// and since we used an interface to do so
@@ -35,10 +35,10 @@ public class ManipulatePlow extends CommandBase {
 		// we make it a state
 		// so that we can always call execute on it
 		// polymorphism, n00bs
-		State intakingState = new Intaking(fire, intake);
-		State firingState = new Firing(fire, intake);
-		State plowDownState = new PlowDown(fire, intake);
-		State plowUpState = new PlowUp(fire, intake);
+		State intakingState = new Intaking(cannon, plow);
+		State firingState = new Firing(cannon, plow);
+		State plowDownState = new PlowDown(cannon, plow);
+		State plowUpState = new PlowUp(cannon, plow);
 	
 		// we set the default state to the calibration state
 		// so that when teleop creates this object as part of a command group

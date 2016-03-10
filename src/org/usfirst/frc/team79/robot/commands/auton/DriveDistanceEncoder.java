@@ -4,12 +4,12 @@ import org.usfirst.frc.team79.robot.commands.CommandBase;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveDistance extends CommandBase {
+public class DriveDistanceEncoder extends CommandBase {
 	
 	double distance;
 	boolean isFinished;
 	
-	public DriveDistance(double distance) {
+	public DriveDistanceEncoder(double distance) {
 		requires(drivetrain);
 		drivetrain.resetEncoders();
 		this.distance = distance;
@@ -56,6 +56,7 @@ public class DriveDistance extends CommandBase {
 	@Override
 	protected void end() {
 		drivetrain.moveTank(0, 0);
+		drivetrain.resetEncoders();
 	}
 
 	@Override
