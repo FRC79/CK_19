@@ -54,8 +54,12 @@ public class ManipulatePlow extends CommandBase {
 		// check my comments inside of the buttonbindings class in the util package
 		ButtonBindings.bind(firingState, OI.firing);
 		ButtonBindings.bind(intakingState, OI.intaking);
-		ButtonBindings.bind(plowDownState, OI.plowDown);
-		ButtonBindings.bind(plowUpState, OI.plowUp);
+		
+		ButtonBindings.bind(plowUpState, OI.manualPlowUp);
+		ButtonBindings.bind(plowDownState, OI.manualPlowDown);
+		
+//		ButtonBindings.bind(plowUpState, OI.overrideBothUp);
+//		ButtonBindings.bind(plowDownState, OI.overrideBothDown);
 		
 	}
 

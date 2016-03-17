@@ -118,7 +118,6 @@ public class ArcadeState implements State {
 			
 			accelMoveX = (((joyX - accelMoveX) / 2) + accelMoveX);
 			accelMoveY = (((joyY - accelMoveY) / 2) + accelMoveY);
-			drive.moveArcade(accelMoveY, accelMoveX);
 			
 			if(joyX == 0) {
 				accelMoveX = 0;
@@ -127,6 +126,8 @@ public class ArcadeState implements State {
 			if(joyY == 0) {
 				accelMoveY = 0;
 			}
+			
+			drive.moveArcade(accelMoveY, accelMoveX);
 			
 		}
 				

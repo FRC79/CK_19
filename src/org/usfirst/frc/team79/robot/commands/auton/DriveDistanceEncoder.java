@@ -8,11 +8,12 @@ public class DriveDistanceEncoder extends CommandBase {
 	
 	double distance;
 	boolean isFinished;
+	double speed;
 	
-	public DriveDistanceEncoder(double distance) {
+	public DriveDistanceEncoder(double distance, double speed) {
 		requires(drivetrain);
-		drivetrain.resetEncoders();
 		this.distance = distance;
+		this.speed = speed;
 	}
 
 	@Override
@@ -24,28 +25,24 @@ public class DriveDistanceEncoder extends CommandBase {
 	@Override
 	protected void execute() {
 		
-		SmartDashboard.putDouble("Encoder distance", getDistanceFeet());
+		SmartDashboard.putDouble("Encoder distance", drivetrain.getRightEncoder());
 
 		if(distance > 0) {
-			if(getDistanceFeet() < distance) {
-				drivetrain.moveTank(1.0, 1.0);
+			if(drivetrain.getRightEncoder() < distance) {
+				drivetrain.moveTank(speed, speed);
 			} else {
 				drivetrain.moveTank(0, 0);
 				isFinished = true;
 			}
 		} else {
-			if(getDistanceFeet() > distance) {
-				drivetrain.moveTank(-1.0, -1.0);
+			if(drivetrain.getRightEncoder() > distance) {
+				drivetrain.moveTank(-speed, -speed);
 			} else {
 				drivetrain.moveTank(0, 0);
 				isFinished = true;
 			}
 		}
-		
-	}
-	
-	public double getDistanceFeet() {
-		return ((drivetrain.getLeftEncoder() * 25.13) / 254) / 12;
+				
 	}
 
 	@Override
@@ -56,7 +53,6 @@ public class DriveDistanceEncoder extends CommandBase {
 	@Override
 	protected void end() {
 		drivetrain.moveTank(0, 0);
-		drivetrain.resetEncoders();
 	}
 
 	@Override

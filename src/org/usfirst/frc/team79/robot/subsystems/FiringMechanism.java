@@ -39,18 +39,8 @@ public class FiringMechanism extends Subsystem {
 	
 	// returns true if both banners are clear
 	public boolean isIntakeEmpty() {
-		return (bannerFront.get() && bannerBack.get());
+		return (bannerBack.get());
 	}
-	
-//	// stupid getter for the fired boolean
-//	public boolean isFired() {
-//		return fired;
-//	}
-	
-//	// stupid setter for the fired boolean
-//	public void setFired(boolean fired) {
-//		this.fired = fired;
-//	}
 
 	// again, we literally never use this
 	@Override

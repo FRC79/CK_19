@@ -4,13 +4,15 @@ import org.usfirst.frc.team79.robot.subsystems.FiringMechanism;
 import org.usfirst.frc.team79.robot.subsystems.PlowMechanism;
 import org.usfirst.frc.team79.robot.utilities.State;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Timer;
 
 public class Firing implements State {
 	
 	FiringMechanism firingSystem;
 	PlowMechanism intakeSystem;
+	
+	boolean startedFiring;
+	boolean firing;
 	
 	double currentTime;
 	
@@ -25,12 +27,12 @@ public class Firing implements State {
 	@Override
 	public void execute() {
 		
+		
+		
 		// execute is the handshake between the state interface and this class
 		// it lets every other object know it can call execute on a State
 		// and it will be guaranteed to contain an execute method
 		
-		intakeSystem.set(Value.kForward);
-
 		if(!firingSystem.isIntakeEmpty()) {
 			firingSystem.setFireIntake(1.0);
 			currentTime = Timer.getFPGATimestamp();

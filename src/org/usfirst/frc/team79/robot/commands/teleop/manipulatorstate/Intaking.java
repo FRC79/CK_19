@@ -26,7 +26,7 @@ public class Intaking implements State {
 		// now that we're intaking again, we say that a ball hasn't been fired
 		// so we can than call our fire state and have it check the finished firing loop
 		
-		intakeSystem.set(Value.kForward);
+		intakeSystem.set(Value.kReverse);
 		
 	   	// if the feed is empty, start intaking
 		if(firingSystem.isIntakeEmpty()) {

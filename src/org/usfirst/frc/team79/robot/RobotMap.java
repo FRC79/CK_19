@@ -67,7 +67,7 @@ public class RobotMap {
 	
 	// Servos
 	
-	public static int STOP_SERVO = 12;
+	public static int STOP_SERVO = 8;
 	
 	// Sonar
 	

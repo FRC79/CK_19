@@ -17,6 +17,6 @@ public class LimitSwitch extends DigitalInput {
 
 	@Override
 	public boolean get() {
-		return !super.get();	// Flips the value to compensate for the pull-up resistor
+		return super.get();
 	}
 }

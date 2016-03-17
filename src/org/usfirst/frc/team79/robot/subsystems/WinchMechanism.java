@@ -24,7 +24,7 @@ public class WinchMechanism extends Subsystem {
 		elevatorComplement = new Victor(RobotMap.WINCH_EXTEND_OPPOSITE);
 		wincher = new DoubleSolenoid(RobotMap.WINCH_SOLENOID_A, RobotMap.WINCH_SOLENOID_B);
 		elevationPot = new AnalogPotentiometer(RobotMap.WINCH_ELEVATION_POTENTIOMETER);
-		wincher.set(Value.kReverse);
+		wincher.set(Value.kForward);
 		lowerStop = new LimitSwitch(RobotMap.LIMIT_BOTTOM_ELEVATOR);
 		stopServo = new Servo(RobotMap.STOP_SERVO);
 	}
@@ -48,6 +48,10 @@ public class WinchMechanism extends Subsystem {
 	
 	public void setServo(double degrees) {
 		stopServo.setAngle(degrees);
+	}
+	
+	public double getServoDegrees() {
+		return stopServo.getAngle();
 	}
 	
 	@Override

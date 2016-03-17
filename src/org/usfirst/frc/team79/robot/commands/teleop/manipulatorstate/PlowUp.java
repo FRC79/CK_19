@@ -19,7 +19,7 @@ public class PlowUp implements State {
 	@Override
 	public void execute() {
 		firingSystem.setFireIntake(0);
-		intakeSystem.set(Value.kForward);
+		intakeSystem.set(Value.kReverse);
 	}
 
 }

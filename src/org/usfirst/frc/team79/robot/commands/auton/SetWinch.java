@@ -6,9 +6,12 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class SetWinch extends CommandBase {
 	
+	Value value;
+	boolean isFinished;
+	
 	public SetWinch(Value value) {
 		requires(winch);
-		winch.set(value);
+		this.value = value;
 	}
 
 	@Override
@@ -18,12 +21,13 @@ public class SetWinch extends CommandBase {
 
 	@Override
 	protected void execute() {
-		
+		winch.set(value);
+		isFinished = true;
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return true;
+		return isFinished;
 	}
 
 	@Override

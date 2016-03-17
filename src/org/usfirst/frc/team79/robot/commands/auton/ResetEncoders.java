@@ -2,41 +2,40 @@ package org.usfirst.frc.team79.robot.commands.auton;
 
 import org.usfirst.frc.team79.robot.commands.CommandBase;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-
-public class SetPlow extends CommandBase {
+public class ResetEncoders extends CommandBase {
 	
-	Value value;
-	boolean isFinished;
-	
-	public SetPlow(Value value) {
-		requires(plow);
-		this.value = value;
+	public ResetEncoders() {
+		requires(drivetrain);
+		drivetrain.resetEncoders();
 	}
 
 	@Override
 	protected void initialize() {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void execute() {
-		plow.set(value);
-		isFinished = true;
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	protected boolean isFinished() {
+		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	protected void end() {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void interrupted() {
+		// TODO Auto-generated method stub
 		
 	}
 

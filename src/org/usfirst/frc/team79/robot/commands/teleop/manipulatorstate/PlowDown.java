@@ -26,7 +26,7 @@ public class PlowDown implements State {
 		
 		firingSystem.setFireIntake(0);
 		
-		intakeSystem.set(Value.kReverse);
+		intakeSystem.set(Value.kForward);
 		
 	}
 

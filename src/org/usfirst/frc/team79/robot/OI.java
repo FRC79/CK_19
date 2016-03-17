@@ -12,30 +12,46 @@ public class OI {
 	
 	public static boolean controllerToggle;
 	
+	//  left top, 5, left bottom 7
+	// rightntop, 6, right bottom 8
+	
 	public static Joystick left, right;
 	public static Joystick gamePad;
+	
 	public static JoystickButton 
-		rotateArm, firing, intaking, plowDown, plowUp, 
-		winchArmToggle, servoStopToggle, 
-		loggingToggle;
-//	public static final JoystickButton[] TOGGLE_STATE = new JoystickButton[4];
+		 firing, intaking,
+		 overrideBothUp, overrideBothDown,
+		 servoStopToggle, 
+		 loggingToggle,
+		 manualPlowUp, manualPlowDown, manualArmUp, manualArmDown,
+		 elevateUp, elevateDown;
 	
 	public static void init() {
 		
 		left = new Joystick(RobotMap.LEFTCONTROLLER);
 		right = new Joystick(RobotMap.RIGHTCONTROLLER);
+		
 		gamePad = new Joystick(1);
-		rotateArm = new JoystickButton(left, 2);
 		
 		firing = new JoystickButton(gamePad, 3);
 		intaking = new JoystickButton(gamePad, 1);
-		plowDown = new JoystickButton(gamePad, 2);
-		plowUp = new JoystickButton(gamePad, 4);
 		
-		winchArmToggle = new JoystickButton(gamePad, 7);
+		overrideBothUp = new JoystickButton(gamePad, 4);
+		overrideBothDown = new JoystickButton(gamePad, 2);
+		
 		servoStopToggle = new JoystickButton(left, 3);
 		
 		loggingToggle = new JoystickButton(left, 1);
+		
+		manualArmUp = new JoystickButton(gamePad, 5);
+		manualArmDown = new JoystickButton(gamePad, 7);
+		
+		manualPlowUp = new JoystickButton(gamePad, 6);
+		manualPlowDown = new JoystickButton(gamePad, 8);
+		
+		elevateUp = new JoystickButton(gamePad, 10);
+		elevateDown = new JoystickButton(gamePad, 9);
+		
 		
 	}
 	

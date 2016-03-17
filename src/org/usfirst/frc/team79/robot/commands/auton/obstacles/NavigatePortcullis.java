@@ -1,6 +1,7 @@
 package org.usfirst.frc.team79.robot.commands.auton.obstacles;
 
 import org.usfirst.frc.team79.robot.commands.auton.DriveDistanceEncoder;
+import org.usfirst.frc.team79.robot.commands.auton.ResetEncoders;
 import org.usfirst.frc.team79.robot.commands.auton.SetPlow;
 import org.usfirst.frc.team79.robot.commands.auton.SetWinch;
 import org.usfirst.frc.team79.robot.commands.auton.WaitForTime;
@@ -14,8 +15,9 @@ public class NavigatePortcullis extends CommandGroup {
 		// set winch and plow down
 		addSequential(new SetPlow(Value.kForward));
 		addParallel(new SetWinch(Value.kReverse));
-		addSequential(new WaitForTime(0.5));
-		addSequential(new DriveDistanceEncoder(4)); // blow through both distances
+		addSequential(new WaitForTime(3.0));
+		addSequential(new DriveDistanceEncoder(4, 0.5)); // blow through both distances
+		addSequential(new ResetEncoders());
 	}
 
 }
