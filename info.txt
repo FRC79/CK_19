@@ -1,0 +1,6 @@
+This is the image verbatim of what is currently within CK_19's flash mem.
+
+Mind you, there were made many quick edits during competition, and you will find many extraneous code bits lying around.
+to me this is unaccaptable, and thus this code is under quarante, preped for a thorough cleaning delegated to a copy directory
+
+janitorial joking aside, this code really is what's currently on the roboRIO
