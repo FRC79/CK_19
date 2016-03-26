@@ -1,11 +1,11 @@
-package org.usfirst.frc.team79.robot.commands.auton;
+package org.usfirst.frc.team79.robot.commands.auton.commands;
 
 import org.usfirst.frc.team79.robot.commands.CommandBase;
 
-public class WaitForTime extends CommandBase {
+public class Wait extends CommandBase {
 
 	
-	public WaitForTime(double timeOut) {
+	public Wait(double timeOut) {
 		setTimeout(timeOut);
 	}
 	

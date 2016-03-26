@@ -2,10 +2,10 @@ package org.usfirst.frc.team79.robot.commands.teleop;
 
 import org.usfirst.frc.team79.robot.OI;
 import org.usfirst.frc.team79.robot.commands.CommandBase;
-import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.Firing;
-import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.Intaking;
-import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.PlowDown;
-import org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate.PlowUp;
+import org.usfirst.frc.team79.robot.commands.teleop.commands.Firing;
+import org.usfirst.frc.team79.robot.commands.teleop.commands.Intaking;
+import org.usfirst.frc.team79.robot.commands.teleop.commands.PlowDown;
+import org.usfirst.frc.team79.robot.commands.teleop.commands.PlowUp;
 import org.usfirst.frc.team79.robot.utilities.ButtonBindings;
 import org.usfirst.frc.team79.robot.utilities.State;
 

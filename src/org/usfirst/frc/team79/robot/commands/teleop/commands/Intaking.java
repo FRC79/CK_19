@@ -1,4 +1,4 @@
-package org.usfirst.frc.team79.robot.commands.teleop.manipulatorstate;
+package org.usfirst.frc.team79.robot.commands.teleop.commands;
 
 import org.usfirst.frc.team79.robot.subsystems.FiringMechanism;
 import org.usfirst.frc.team79.robot.subsystems.PlowMechanism;

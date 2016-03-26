@@ -22,8 +22,8 @@ public class ManipulateWinch extends CommandBase {
 	
 	boolean servoEngaged;
 	
-	private final double ELEVATION_MAX = 0.69; 
-	private final double ELEVATION_COMP_MIN = 0.17;
+	private final double ELEVATION_MAX = 0.72; 
+	private final double ELEVATION_COMP_MIN = 0.17; // previous comp value @ 0.17
 	
 	public ManipulateWinch() {
 		requires(winch);
@@ -43,9 +43,6 @@ public class ManipulateWinch extends CommandBase {
 		listenEngageServo();
 		
 		SmartDashboard.putDouble("Elevation Potentiometer Value", winch.getElevationValue());
-		SmartDashboard.putBoolean("Limit Switch for elevation stop", winch.getLimit());
-		SmartDashboard.putDouble("Servo angle", winch.getServoDegrees());
-		SmartDashboard.getBoolean("Is the servo stop engaged ?", servoEngaged);
 		
 	}
 	
