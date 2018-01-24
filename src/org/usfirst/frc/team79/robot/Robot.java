@@ -25,8 +25,7 @@ public class Robot extends IterativeRobot {
     	OI.init();
 
     	server = CameraServer.getInstance();
-    	server.setQuality(100);
-    	server.startAutomaticCapture("cam0");
+    	server.startAutomaticCapture("cam0", 0);
     	
     	autonSelector = new SendableChooser();
     	
@@ -57,10 +56,10 @@ public class Robot extends IterativeRobot {
     	
     	Scheduler.getInstance().removeAll();
     	
-    	if(SmartDashboard.getBoolean("UsePID")) {
-    		GlobalAutonData.kp = SmartDashboard.getNumber("kpChooser");
-    		GlobalAutonData.ki = SmartDashboard.getNumber("kiChooser");
-    		GlobalAutonData.kd = SmartDashboard.getNumber("kdChooser");
+    	if(SmartDashboard.getBoolean("UsePID", false)) {
+    		GlobalAutonData.kp = SmartDashboard.getNumber("kpChooser", 0);
+    		GlobalAutonData.ki = SmartDashboard.getNumber("kiChooser", 0);
+    		GlobalAutonData.kd = SmartDashboard.getNumber("kdChooser", 0);
     	} else {
     		GlobalAutonData.kp = 0;
     		GlobalAutonData.ki = 0;

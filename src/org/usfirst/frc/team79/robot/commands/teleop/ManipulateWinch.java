@@ -42,7 +42,7 @@ public class ManipulateWinch extends CommandBase {
 		listenMoveArm();
 		listenEngageServo();
 		
-		SmartDashboard.putDouble("Elevation Potentiometer Value", winch.getElevationValue());
+		SmartDashboard.putNumber("Elevation Potentiometer Value", winch.getElevationValue());
 		
 	}
 	

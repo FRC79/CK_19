@@ -34,9 +34,9 @@ public class Drive extends CommandBase {
 	@Override
 	protected void execute() {
 		state.execute();
-		SmartDashboard.putDouble("Left encoder in Feet", drivetrain.getLeftEncoder());
-		SmartDashboard.putDouble("Right Encoder Feet", drivetrain.getRightEncoder());
-		SmartDashboard.putDouble("Gyro degrees", gyro.getGyroAngle());
+		SmartDashboard.putNumber("Left encoder in Feet", drivetrain.getLeftEncoder());
+		SmartDashboard.putNumber("Right Encoder Feet", drivetrain.getRightEncoder());
+		SmartDashboard.putNumber("Gyro degrees", gyro.getGyroAngle());
 	}
 	
 	@Override
