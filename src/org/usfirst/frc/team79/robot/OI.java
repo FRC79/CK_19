@@ -79,8 +79,8 @@ public class OI {
 		return right.getY();
 	}
 	
-	public static double getX() {
-		return left.getX();
+	public static double getZ() {
+		return left.getZ();
 	}
 	
 	public static double getY() {

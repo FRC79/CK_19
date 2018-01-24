@@ -113,7 +113,7 @@ public class ArcadeState implements State {
 			
 			pastTime = currentTime;
 			
-			joyX = OI.getX();
+			joyX = OI.getZ();
 			joyY = OI.getY();
 			
 			accelMoveX = (((joyX - accelMoveX) / 2) + accelMoveX);
