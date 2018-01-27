@@ -127,7 +127,7 @@ public class ArcadeState implements State {
 				accelMoveY = 0;
 			}
 			
-			drive.moveArcade(accelMoveY, accelMoveX);
+			drive.moveArcade(-accelMoveY, -accelMoveX);
 			
 		}
 				
